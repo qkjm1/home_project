@@ -5,6 +5,8 @@
 <%@ include file="../common/head.jspf"%>
 
 <title>LOGIN</title>
+<link rel="stylesheet" href="/resource/common.css" />
+
 <div class="contents-box">
 	<div class="signup-box flex">
 		<form action="/usr/member/doLogin" method="POST">

@@ -17,8 +17,4 @@ public interface MemberRepository {
 	public int  memberJoin(String loginId, String loginPw, String name, String email, String nickname,
 			String cellphoneNum);
 
-	public Member memberByloginId(String loginId);
-
-
-
 }

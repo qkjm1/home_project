@@ -47,9 +47,9 @@ public class MemberService {
 		return memberRepository.memberById(loginId);
 	}
 
-
-	public Member logincof(String loginId) {		
-		return memberRepository.memberByloginId(loginId);
+	public Member doLogin(String loginId) {
+		Member member = memberById(loginId);
+		return member;
 	}
 
 }

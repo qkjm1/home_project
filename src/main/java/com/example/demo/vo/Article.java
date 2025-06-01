@@ -11,23 +11,23 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Member {
+public class Article {
 
 	private int id;
-	private LocalDateTime regDate;
-	private LocalDateTime updateDate;
-	private String loginId;
-	private String loginPw;
-	private String name;
-	private String nickname;
-	private String cellphoneNum;
-	private String email;
+	private String regDate;
+	private String updateDate;
+	private String title;
+	private String body;
 	
+	private int usrId;
+	private int boardId;
+	private int hitCount;
+	private int goodRp;
+
 	private boolean delStatus;
 	private LocalDateTime delDate;
 
-	private String google_loginId;
-	private String kakao_loginId;
+	private boolean usrAuthor;
 	
-	
+	private String extra__writer;
 }

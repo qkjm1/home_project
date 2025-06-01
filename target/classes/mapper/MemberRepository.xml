@@ -3,26 +3,17 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.demo.repository.MemberRepository">
-<!-->아이디로 전체 행 가져오기</!-->
-	<select id="memberById"
-		resultType="com.example.demo.vo.Member">
-		SELECT *
-		FROM `user`
-		WHERE
-		loginId = #{loginId}
-	</select>
-	
-	<select id="memberByloginId"
-		resultType="com.example.demo.vo.Member">
-		SELECT *
-		FROM `user`
-		WHERE
-		loginId = #{loginId}
-	</select>
-	
 
-<!-->인설트</!-->
+<mapper namespace="com.example.demo.repository.MemberRepository">
+	<!-->아이디로 전체 행 가져오기</! -->
+	<select id="memberById" resultType="com.example.demo.vo.Member">
+		SELECT *
+		FROM `user`
+		WHERE
+		loginId = #{loginId}
+	</select>
+
+	<!-->인설트</! -->
 	<insert id="memberJoin" parameterType="map">
 		INSERT INTO `user`
 		SET
@@ -30,14 +21,14 @@
 		updateDate =
 		NOW(),
 		loginId = #{loginId},
-		loginPw = #{loginPw},
+		loginPw =
+		#{loginPw},
 		`name` = #{name},
 		nickname = #{nickname},
-		cellphoneNum = #{cellphoneNum},
+		cellphoneNum =
+		#{cellphoneNum},
 		email =
 		#{email};
 	</insert>
-	
-
 
 </mapper>

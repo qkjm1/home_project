@@ -4,8 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${pageTitle }</title>
-<link rel="stylesheet" href="/resource/common.css" />
+<title>${pageTitle}</title>
+<link rel="stylesheet" href="/resource/head.css" />
 <script src="/resource/common.js" defer="defer"></script>
 <!-- 제이쿼리 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -23,7 +23,31 @@
 </head>
 <body>
 	<header>
-		<div class="flex">
-			<div class="top_logo">LOGO</div>
+		<div class="top-bar flex mx-auto items-center text-3xl">
+			<div class="top-box flex items-center mx-auto">
+				<a href="/">LOGO</a>
+				<div class="flex-grow"></div>
+				<ul class="flex log">
+					<c:if test="${!rq.isLogined() }">
+						<li>
+							<a class="hover:underline" href="../member/login">로그인</a>
+						</li>
+						<li>
+							<a class="hover:underline" href="../member/join">회원가입</a>
+						</li>
+					</c:if>
+					<c:if test="${rq.isLogined() }">
+						<li>
+							<a class="hover:underline" href="../article/write">마이페이지</a>
+						</li>
+						<li>
+							<a onclick="if(confirm('로그아웃 하시겠습니까?') == false) return false;" class="hover:underline" href="../member/doLogout">로그아웃</a>
+						</li>
+					</c:if>
+				</ul>
+			</div>
 		</div>
+
+
+
 	</header>

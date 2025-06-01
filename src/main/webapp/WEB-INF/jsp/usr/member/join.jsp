@@ -5,6 +5,7 @@
 <%@ include file="../common/head.jspf"%>
 
 <title>JOIN</title>
+<link rel="stylesheet" href="/resource/common.css" />
 <div class="contents-box">
 	<div class="signup-box flex">
 		<form action="/usr/member/dojoin" method="POST" onsubmit="return validatePasswords();">

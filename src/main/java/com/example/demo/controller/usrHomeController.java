@@ -8,13 +8,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class usrHomeController {
 	
 	@RequestMapping("/usr/home/main")
-	@ResponseBody
 	public String main() {
-		return "hello world!!!!!!!!!!!!!!!!!!!!!!";
+		return "/usr/home/main";
 	}
 	
-	@RequestMapping("/usr/home/demo")
+	@RequestMapping("/")
 	public String demo() {
-		return "/usr/demo";
+		return "/usr/home/main";
 	}
 }
