@@ -28,6 +28,9 @@
 				<a href="/">LOGO</a>
 				<div class="flex-grow"></div>
 				<ul class="flex log">
+					<li>
+						<a href="../article/list?boardId=3">QnA</a>
+					</li>
 					<c:if test="${!rq.isLogined() }">
 						<li>
 							<a class="hover:underline" href="../member/login">로그인</a>

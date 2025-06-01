@@ -10,8 +10,7 @@
 <div class="contain flex flex-col mx-auto">
 
 
-
-	<!-->검색어</!-->
+	<div class="h-6"></div>
 	<div class="flex ">
 		<form action="" class="mx-auto w-full">
 			<input type="hidden" name="searchKeywordTypeCode" value="QnA" />
@@ -33,35 +32,39 @@
 
 
 
-	<!-->큐앤에이목록</!-->
-
 	<div class="flex flex-grow ">
-		<c:forEach var="article" items="${articles}">
-			<div class="qna-box felx flex-col mx-auto">
-				<div class="qna-title mx-auto flex items-center justify-center">
-					<a href="/" class="text-xl">${article.title}</a>
-					<div class="flex-grow"></div>
-					<div class="">${article.regDate.substring(0,10)}</div>
-				</div>
-				<div class="qna-body">
-					<a href="/">${article.body}</a>
-					<div class="qna-open">
-						<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none"
-							stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+		<div class="qna-con felx flex-col mx-auto">
+			<c:forEach var="article" items="${articles}">
+				<div class="qna-box">
+					<div class="qna-title mx-auto flex items-center justify-center">
+						<a href="/" class="text-xl font-bold">${article.title}</a>
+						<div class="flex-grow"></div>
+						<div class="">${article.regDate.substring(0,10)}</div>
+					</div>
+					<div class="qna-body">
+						<a href="/">${article.body}</a>
+						<div class="qna-open">
+							<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none"
+								stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
   <polyline points="6 9 12 15 18 9" />
 				</svg>
+						</div>
 					</div>
 				</div>
-			</div>
-		</c:forEach>
-		<c:if test="${empty articles }">
-			<div style="text-align: center;">게시글이 없습니다</div>
-		</c:if>
+			</c:forEach>
+			<c:if test="${empty articles }">
+				<div class="qna-box flex flex-col">
+					<div class="flex-grow"></div>
+					<div style="text-align: center;">게시글이 없습니다</div>
+					<div class="flex-grow"></div>
+				</div>
+			</c:if>
+		</div>
 	</div>
 
 
 	<div class="flex flex-grow">
-		<div class="flex justify-center mt-4">
+		<div class="flex mx-auto mt-4">
 			<div class="btn-group join ">
 				<c:set var="paginationLen" value="5" />
 				<c:set var="startPage" value="${page - paginationLen >= 1 ? page - paginationLen : 1 }" />
@@ -95,6 +98,6 @@
 		</div>
 	</div>
 
-
-	</body>
-	</html>
+</div>
+</body>
+</html>

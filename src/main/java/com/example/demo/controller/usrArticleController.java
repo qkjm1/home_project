@@ -90,7 +90,7 @@ public class usrArticleController {
 		return ResultData.from(usrAuthor.getResultCode(), usrAuthor.getMsg());
 	}
 
-	@RequestMapping("/usr/article/lisst")
+	@RequestMapping("/usr/article/list")
 	public String showList(
 			HttpServletRequest req, Model model, @RequestParam(defaultValue = "1") int boardId,
 			@RequestParam(defaultValue = "1") int page,
@@ -101,13 +101,13 @@ public class usrArticleController {
 		if (boardId != 0) {
 			Board board = boardService.getBoardById(boardId);
 			if (board == null) {
-				return rq.historyBackOnView("존재하지 않는 게시판");
+				return "존재하지 않는 게시판";
 			}
 		}
 
 		Board board = boardService.getBoardById(boardId);
 
-		int listInApage = 10;
+		int listInApage = 5;
 
 		int articlesCntByboard = articleService.getArticleCountByBoard(boardId, searchKeywordTypeCode, searchKeyword);
 
@@ -125,12 +125,7 @@ public class usrArticleController {
 		model.addAttribute("searchKeywordTypeCode", searchKeywordTypeCode);
 		model.addAttribute("searchKeyword", searchKeyword);
 
-		return "/usr/article/listt";
-	}
-	
-	@RequestMapping("/usr/article/list")
-	public String showLidst() {
-		return "/usr/article/list";	
+		return "/usr/article/list";
 	}
 	
 
