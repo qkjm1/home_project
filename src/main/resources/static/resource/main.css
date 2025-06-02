@@ -14,6 +14,11 @@ body {
 	background-color: #708090;
 }
 
+#webgl-container {
+	width: 900px;
+	height: 1260px;
+}
+
 .main_2-box {
 	width: 100%;
 	height: 3000px;

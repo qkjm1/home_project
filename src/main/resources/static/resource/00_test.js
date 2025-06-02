@@ -1,34 +1,65 @@
 import * as THREE from 'three';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { GLTFLoader } from 'GLTFLoader';
+import { OrbitControls } from 'OrbitControls';
 
-const controls = new OrbitControls( camera, renderer.domElement );
 
+const container = document.getElementById('webgl-container');
 
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
+scene.background = new THREE.Color(0xdddddd);
 
-// 조명
-const light = new THREE.DirectionalLight(0xffffff, 1);
-light.position.set(1, 1, 1).normalize();
+const width = 900;
+const height = 1260;
+
+const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+camera.position.set(5, 5, 5);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(900, 1260);
+container.appendChild(renderer.domElement);
+
+// OrbitControls
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+
+// 조명 추가
+const color = 0xffffff;
+const intensity = 2;
+const light = new THREE.DirectionalLight(color, intensity);
+light.position.set(-1, 2, 4);
 scene.add(light);
 
-// GLB 파일 불러오기
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+scene.add(ambientLight);
+
+
 const loader = new GLTFLoader();
-loader.load('/model/LowP.glb', (gltf) => {
-  scene.add(gltf.scene);
-  gltf.scene.position.set(0, 0, 0);
-}, undefined, (error) => {
-  console.error('Error loading GLB:', error);
+loader.load('/models/LowP.glb', function(gltf) {
+	const model = gltf.scene;
+	scene.add(model);
+	model.position.set(0, 0, 0);
+}, undefined, function(error) {
+	console.error('An error happened:', error);
 });
 
-camera.position.z = 5;
 
+// 반응형
+window.addEventListener('resize', () => {
+	camera.aspect = window.innerWidth / window.innerHeight;
+	camera.updateProjectionMatrix();
+	renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// 애니메이션 루프
 function animate() {
-  requestAnimationFrame(animate);
-  renderer.render(scene, camera);
+	requestAnimationFrame(animate);
+	controls.update();
+	renderer.render(scene, camera);
 }
 animate();
+
+loader.load('models/LowP.glb', (gltf) => {
+	console.log(gltf.scene);
+});
+
+

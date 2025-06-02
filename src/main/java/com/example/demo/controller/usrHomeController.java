@@ -16,4 +16,9 @@ public class usrHomeController {
 	public String demo() {
 		return "/usr/home/main";
 	}
+	
+	@RequestMapping("/demo")
+	public String dddemo() {
+		return "/usr/demo";
+	}
 }
