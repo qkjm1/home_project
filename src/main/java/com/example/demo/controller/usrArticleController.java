@@ -133,7 +133,7 @@ public class usrArticleController {
 	public String showInfoList(
 			HttpServletRequest req, Model model, @RequestParam(defaultValue = "1") int boardId,
 			@RequestParam(defaultValue = "1") int page,
-			@RequestParam(defaultValue = "QnA") String searchKeywordTypeCode,
+			@RequestParam(defaultValue = "info") String searchKeywordTypeCode,
 			@RequestParam(defaultValue = "") String searchKeyword) throws IOException {
 
 		// 보드아이디로 있는 게시판인지 확인

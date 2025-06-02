@@ -201,23 +201,63 @@ ul, li, a {
 	height: 100%;
 }
 
+
+/*  인포박스   */
 .info-box {
-	align-content: center;
+	position: relative;
+	align-items: center; 
+}
+.info-box-in {
+	margin-top:120px;
+	padding-left:3px;
+	padding-right:3px;
 }
 
-.info-box>div>div {
+.info-box-in>div:first-child>div{
 	border-radius: 4px; /* 둥글게 */
-	width: calc(100%/ 3);;
-	height: 226px;
+	height: 270px;
 	background-color: white;
-	margin: 5px;
+	width: 100%;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.info-box>div>div:last-of-type {
-	margin-right: 10px;
+
+.info-title > a{
+	width:50%;
+	white-space: pre;
+	overflow: hidden;
 }
 
-.info-box>div>div:first-child {
-	margin-left: 10px;
+.info-body {
+	margin-top: 10px;
+    border-radius: 8px;
+    padding: 10px;
+    width: 100%;
+    background-color: #F5F5F5;
+    height: 79%;
+    white-space: normal;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
+
+
+.paging {
+	position: absolute;
+	bottom: 50px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

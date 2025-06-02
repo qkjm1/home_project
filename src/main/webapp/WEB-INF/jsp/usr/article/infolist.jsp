@@ -63,24 +63,58 @@
 			<div class="flex-grow"></div>
 		</div>
 		<div class="w-3"></div>
-		<div class="info-box flex flex-wrap">
-			<div class="w-full flex">
-				<div class="info-title">
-					<div class="qna-title mx-auto flex items-center justify-center">
-						<a href="/" class="text-xl font-bold">123${article.title}</a>
-						<div class="">123${article.regDate.substring(0,10)}</div>
-					</div>
-					<div class="qna-body">
-						<a href="/">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit recusandae voluptas sapiente reprehenderit natus consequuntur vel aliquid temporibus beatae suscipit labore voluptatibus at accusamus nulla nobis expedita eum. Repudiandae molestiae?${article.body}</a>
-					</div>
+		<div class="info-box flex flex-col">
+			<div class="info-box-in flex flex-col">
+				<div class="grid grid-cols-3 gap-1">
+					<c:forEach var="article" items="${articles}">
+						<div class="p-3 ">
+							<div class="info-title flex justify-between">
+								<a href="/" class="text-xl font-bold">${article.extra__writer}</a>
+								<button type="submit">ㅁ</button>
+							</div>
+							<div class="info-body">
+								<a href="/">${article.body}</a>
+							</div>
+						</div>
+					</c:forEach>
 				</div>
-				<div>2</div>
-				<div>3</div>
+				<c:if test="${empty articles }">
+					<div class="flex">
+						<div>게시글이 없습니다</div>
+					</div>
+				</c:if>
 			</div>
-			<div class="w-full flex">
-				<div>4</div>
-				<div>5</div>
-				<div>6</div>
+			<div class="paging flex justify-center mt-4">
+				<div class="btn-group join ">
+					<c:set var="paginationLen" value="5" />
+					<c:set var="startPage" value="${page - paginationLen >= 1 ? page - paginationLen : 1 }" />
+					<c:set var="endPage" value="${page + paginationLen <= totalPage ? page + paginationLen : totalPage}" />
+
+					<c:set var="baseUri" value="?boardId=${boardId}" />
+					<c:set var="baseUri" value="?searchKeywordTypeCode=${searchKeywordTypeCode}" />
+					<c:set var="baseUri" value="?searchKeyword=${searchKeyword}" />
+
+					<c:if test="${startPage > 1}">
+						<a class="join-item btn btn-sm" href="${baseUri}&page=1&boardId=${boardId}">1</a>
+					</c:if>
+
+					<c:if test="${startPage > 2}">
+						<button class="join-item btn btn-sm btn-disabled">...</button>
+					</c:if>
+
+					<c:forEach begin="${startPage }" end="${endPage }" var="i">
+						<a class="join-item btn btn-sm ${param.page == i ? 'btn-active' : ''}"
+							href="${baseUri}&page=${i }&boardId=${boardId}">${i }</a>
+					</c:forEach>
+
+					<c:if test="${endPage < totalPage - 1}">
+						<button class="join-item btn-sm btn btn-disabled">...</button>
+					</c:if>
+
+					<c:if test="${endPage < totalPage}">
+						<a class="join-item btn btn-sm" href="${baseUri}&page=${totalPage }&boardId=${boardId}">${totalPage }</a>
+					</c:if>
+				</div>
 			</div>
 		</div>
 	</div>
