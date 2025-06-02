@@ -12,7 +12,7 @@
 
 	<div class="h-6"></div>
 	<div class="flex ">
-		<form action="" class="mx-auto w-full">
+		<form class="mx-auto w-full">
 			<input type="hidden" name="searchKeywordTypeCode" value="QnA" />
 			<input type="hidden" name="boardId" value="3" />
 			<div class="search-box">

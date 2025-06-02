@@ -90,8 +90,8 @@ public class usrArticleController {
 		return ResultData.from(usrAuthor.getResultCode(), usrAuthor.getMsg());
 	}
 
-	@RequestMapping("/usr/article/list")
-	public String showList(
+	@RequestMapping("/usr/article/qnalist")
+	public String showQnaList(
 			HttpServletRequest req, Model model, @RequestParam(defaultValue = "1") int boardId,
 			@RequestParam(defaultValue = "1") int page,
 			@RequestParam(defaultValue = "QnA") String searchKeywordTypeCode,
@@ -110,8 +110,9 @@ public class usrArticleController {
 		int listInApage = 5;
 
 		int articlesCntByboard = articleService.getArticleCountByBoard(boardId, searchKeywordTypeCode, searchKeyword);
-
+		System.err.println(articlesCntByboard);
 		int totalPage = (int) Math.ceil(articlesCntByboard / (double) listInApage);
+		System.err.println(totalPage);
 
 		List<Article> articles = articleService.getForPrintArticles(boardId, listInApage, page, searchKeywordTypeCode,
 				searchKeyword);
@@ -125,7 +126,46 @@ public class usrArticleController {
 		model.addAttribute("searchKeywordTypeCode", searchKeywordTypeCode);
 		model.addAttribute("searchKeyword", searchKeyword);
 
-		return "/usr/article/list";
+		return "/usr/article/qnalist";
+	}
+	
+	@RequestMapping("/usr/article/infolist")
+	public String showInfoList(
+			HttpServletRequest req, Model model, @RequestParam(defaultValue = "1") int boardId,
+			@RequestParam(defaultValue = "1") int page,
+			@RequestParam(defaultValue = "QnA") String searchKeywordTypeCode,
+			@RequestParam(defaultValue = "") String searchKeyword) throws IOException {
+
+		// 보드아이디로 있는 게시판인지 확인
+		if (boardId != 0) {
+			Board board = boardService.getBoardById(boardId);
+			if (board == null) {
+				return "존재하지 않는 게시판";
+			}
+		}
+
+		Board board = boardService.getBoardById(boardId);
+
+		int listInApage = 6;
+
+		int articlesCntByboard = articleService.getArticleCountByBoard(boardId, searchKeywordTypeCode, searchKeyword);
+		System.err.println(articlesCntByboard);
+		int totalPage = (int) Math.ceil(articlesCntByboard / (double) listInApage);
+		System.err.println(totalPage);
+
+		List<Article> articles = articleService.getForPrintArticles(boardId, listInApage, page, searchKeywordTypeCode,
+				searchKeyword);
+
+		model.addAttribute("articlesCntByboard", articlesCntByboard);
+		model.addAttribute("totalPage", totalPage);
+		model.addAttribute("articles", articles);
+		model.addAttribute("board", board);
+		model.addAttribute("boardId", boardId);
+		model.addAttribute("page", page);
+		model.addAttribute("searchKeywordTypeCode", searchKeywordTypeCode);
+		model.addAttribute("searchKeyword", searchKeyword);
+
+		return "/usr/article/infolist";
 	}
 	
 

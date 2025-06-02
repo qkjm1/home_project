@@ -58,6 +58,7 @@
 		INNER
 		JOIN `user` AS M
 		ON A.usrId = M.id
+		WHERE 1
 		<if test="boardId != 0">AND A.boardId = ${boardId}</if>
 		<if test="searchKeyword != ''">
 			<choose>

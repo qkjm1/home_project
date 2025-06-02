@@ -3,6 +3,11 @@ body {
 	background-color: #F5F5F5;
 }
 
+ul, li, a {
+	display: block;
+	text-decoration: none;
+}
+
 .contents-box {
 	margin: 0;
 	padding: 0;
@@ -144,3 +149,75 @@ body {
 	right: 15px;
 	top: 70%;
 }
+
+/*  info페이지    */
+.info-con {
+	width: 80%;
+	margin-top: 80px;
+	height: 60%;
+}
+
+.side-box {
+	width: 20%;
+	background-color: #F5F5F5;
+	border-radius: 4px; /* 둥글게 */
+}
+
+.info-box {
+	width: 80%;
+	background-color: #F5F5F5;
+	border-radius: 4px; /* 둥글게 */
+}
+
+.side-box>ul {
+	border-top: 1px solid black;
+	display: flex; align-items : center; justify-content : center;
+	height: 80px;
+	width: 100%;
+	position: relative;
+	align-items: center;
+	justify-content: center;
+}
+
+.side-box>ul>li {
+	border-top: 1px solid black;
+	text-align: center;
+	position: absolute;
+	width: 100%;
+	height: 80px;
+}
+
+.side-box>ul>li>a {
+	padding-top: 28px;
+	display: block;
+	height: 100%;
+}
+
+.side-box>ul>li>a:hover {
+	padding-top: 28px;
+	font-weight: bold;
+	display: block;
+	background-color: #e0e0e0;
+	height: 100%;
+}
+
+.info-box {
+	align-content: center;
+}
+
+.info-box>div>div {
+	border-radius: 4px; /* 둥글게 */
+	width: calc(100%/ 3);;
+	height: 226px;
+	background-color: white;
+	margin: 5px;
+}
+
+.info-box>div>div:last-of-type {
+	margin-right: 10px;
+}
+
+.info-box>div>div:first-child {
+	margin-left: 10px;
+}
+

@@ -29,19 +29,20 @@
 				<div class="flex-grow"></div>
 				<ul class="flex log">
 					<li>
-						<a href="../article/list?boardId=3">QnA</a>
+						<a href="../article/infolist?boardId=2">정보</a>
+						<a href="../usr/article/qnalist?boardId=3">qna</a>
 					</li>
 					<c:if test="${!rq.isLogined() }">
 						<li>
-							<a class="hover:underline" href="../member/login">로그인</a>
+							<a class="hover:underline" href="../usr/member/login">로그인</a>
 						</li>
 						<li>
-							<a class="hover:underline" href="../member/join">회원가입</a>
+							<a class="hover:underline" href="../usr/member/join">회원가입</a>
 						</li>
 					</c:if>
 					<c:if test="${rq.isLogined() }">
 						<li>
-							<a class="hover:underline" href="../article/write">마이페이지</a>
+							<a class="hover:underline" href="../usr/member/mypage/likepage">마이페이지</a>
 						</li>
 						<li>
 							<a onclick="if(confirm('로그아웃 하시겠습니까?') == false) return false;" class="hover:underline" href="../member/doLogout">로그아웃</a>

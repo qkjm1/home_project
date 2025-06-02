@@ -3,20 +3,21 @@
 
 <c:set var="pageTitle" value="MAIN PAGE"></c:set>
 <%@ include file="../common/head.jspf"%>
-
 <title>MAIN</title>
+
 <link rel="stylesheet" href="/resource/main.css" />
 <div class="contain mx-auto flex flex-col">
 	<div class="main_1-box flex justify-center mx-auto">
-		<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi excepturi reprehenderit neque minus unde ea
-			asperiores corporis enim natus quo autem eos nostrum officiis dolor eius facilis quibusdam et molestias.</div>
+		<div></div>
 	</div>
 	<div class="main-line"></div>
 	<div class="main_2-box">
 		<div class="info-box flex flex-col">
-			<form class="mx-auto">
+			<form action="/usr/article/infolist" method="post" class="mx-auto">
+				<input type="hidden" name="searchKeywordTypeCode" value="QnA" />
+				<input type="hidden" name="boardId" value="2" />
 				<div class="search-box">
-					<input type="text" placeholder="검색어를 입력하세요" />
+					<input type="text" placeholder="검색어를 입력하세요" name="searchKeyword" value="${param.searchKeyword}" />
 					<button type="submit">
 						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
 							stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
