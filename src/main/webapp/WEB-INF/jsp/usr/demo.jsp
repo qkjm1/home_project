@@ -1,45 +1,34 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="ko">
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.security.SecureRandom" %>
+<%@ page import="java.math.BigInteger" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
 <meta charset="utf-8">
 <title>네이버 로그인</title>
 </head>
 <body>
 
+  <head>
+    <title>네이버로그인</title>
+  </head>
+  <body>
+  <%
+    String clientId = "6mYcCoqVLMhsqTgC69DA";//애플리케이션 클라이언트 아이디값";
+    String redirectURI = URLEncoder.encode("http://localhost:8080/login/oauth2/code/naver", "UTF-8");
+    SecureRandom random = new SecureRandom();
+    String state = new BigInteger(130, random).toString();
+    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code"
+         + "&client_id=" + clientId
+         + "&redirect_uri=" + redirectURI
+         + "&state=" + state;
+    session.setAttribute("state", state);
+ %>
+  <a href="<%=apiURL%>"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
+  </body>
+</html>
 
- <style>
-    body, html {
-      margin: 0;
-      padding: 0;
-    }
-    #webgl-container {
-      width: 800px;
-      height: 600px;
-      border: 1px solid #ccc;
-    }
-    canvas {
-      display: block;
-      width: 100%;
-      height: 100%;
-    }
-  </style>
 
-  <div class="main_1-box flex justify-center mx-auto">
-    <div id="webgl-container"></div>
-  </div>
-
-  <script type="importmap">
-    {
-      "imports": {
-        "three": "https://unpkg.com/three@0.141.0/build/three.module.js",
-        "GLTFLoader": "https://unpkg.com/three@0.141.0/examples/jsm/loaders/GLTFLoader.js",
-        "OrbitControls": "https://unpkg.com/three@0.141.0/examples/jsm/controls/OrbitControls.js"
-      }
-    }
-  </script>
-
-	<script type="module" src="/resource/00_TEST.js"></script>
 
 </body>
 </html>

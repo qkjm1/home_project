@@ -20,6 +20,9 @@
 
 <!-- 데이지 UI -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/daisyui/4.12.23/full.css" />
+
+
+<link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
 </head>
 <body>
 	<header>
@@ -30,7 +33,7 @@
 				<ul class="flex log">
 					<li>
 						<a href="../article/infolist?boardId=2">정보</a>
-						<a href="../usr/article/qnalist?boardId=3">qna</a>
+						<a href="../article/qnalist?boardId=3">qna</a>
 					</li>
 					<c:if test="${!rq.isLogined() }">
 						<li>

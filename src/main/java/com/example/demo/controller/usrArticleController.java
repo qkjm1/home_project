@@ -29,12 +29,24 @@ public class usrArticleController {
 
 	@Autowired
 	private BoardService boardService;
+	
+	
+	@RequestMapping("/usr/article/detail")
+	public String showDetail(HttpServletRequest req, Model model, int articleId) {
 
+		Article article = articleService.getForPrintArticle(rq.getIsLoginMemberId(), articleId);
+		
+		model.addAttribute("article", article);
+		
+		return "usr/article/detail";
+	}
+
+	
 	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
-	public ResultData doWrite(HttpServletRequest req, int usrId, String title, String body, int boardId) {
+	public ResultData doWrite(HttpServletRequest req, String title, String body, int boardId) {
 
-		ResultData doWriteRd = articleService.writeArticle(usrId, title, body, boardId);
+		ResultData doWriteRd = articleService.writeArticle(rq.getIsLoginMemberId(), title, body, boardId);
 
 		return ResultData.from(doWriteRd.getResultCode(), doWriteRd.getMsg());
 	}
@@ -69,7 +81,7 @@ public class usrArticleController {
 
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
-	public ResultData doDelete(HttpServletRequest req, int usrId, int articleId) {
+	public ResultData doDelete(HttpServletRequest req, int articleId) {
 
 		Article article = articleService.articleRowById(articleId);
 
@@ -77,7 +89,7 @@ public class usrArticleController {
 			return ResultData.from("F-1", "없는 게시글");
 		}
 
-		ResultData usrAuthor = articleService.usrAuthor(usrId, article);
+		ResultData usrAuthor = articleService.usrAuthor(rq.getIsLoginMemberId(), article);
 
 		if (usrAuthor.isFail()) {
 			return ResultData.from(usrAuthor.getResultCode(), usrAuthor.getMsg());

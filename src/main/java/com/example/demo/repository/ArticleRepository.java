@@ -25,4 +25,6 @@ public interface ArticleRepository {
 
 	public List<Article> getForPrintArticles(int boardId, int limitTake, int limitForm, String searchKeywordTypeCode,
 			String searchKeyword);
+
+	public Article getForPrintArticle(int articleId);
 }

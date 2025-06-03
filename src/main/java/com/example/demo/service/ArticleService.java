@@ -64,4 +64,23 @@ public class ArticleService {
 			
 		return articleRepository.getForPrintArticles(boardId, limitTake, limitForm, searchKeywordTypeCode, searchKeyword);
 	}
+
+	public Article getForPrintArticle(int isLoginMemberId, int articleId) {
+		Article article = articleRepository.getForPrintArticle(articleId);
+
+		controlForPrintData(isLoginMemberId, article);
+
+		return article;
+	}
+	
+	private void controlForPrintData(int loginedMemberId, Article article) {
+		if (article == null) {
+			return;
+		}	
+// 수정과 삭제가 가능한 유저인지 상세보기 들어갈때 객체 찾아서 저장
+		ResultData usrAuthor = usrAuthor(loginedMemberId, article);
+		article.setUsrAuthor(usrAuthor.isSuccess());
+		
+	}
+	
 }

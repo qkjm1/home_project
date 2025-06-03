@@ -119,7 +119,23 @@
 			LIMIT #{limitForm},#{limitTake}
 		</if>
 	</select>
-	
+
+
+	<select id="getForPrintArticle" parameterType="int"
+		resultType="com.example.demo.vo.Article">
+		SELECT A.*, M.nickname AS extra__writer
+		FROM
+		article A
+		INNER
+		JOIN
+		`user` M
+		ON A.usrId = M.id
+		INNER
+		JOIN board B
+		ON
+		A.boardId = B.id
+		WHERE A.id =#{articleId}
+	</select>
 
 
 </mapper>
