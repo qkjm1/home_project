@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.repository.ArticleRepository;
-import com.example.demo.repository.BookmarkRepository;
-import com.example.demo.repository.MemberRepository;
 import com.example.demo.vo.Article;
-import com.example.demo.vo.Member;
 import com.example.demo.vo.ResultData;
 
 import utill.Ut;
@@ -20,9 +17,6 @@ public class ArticleService {
 	@Autowired
 	private ArticleRepository articleRepository;
 
-	public ResultData printArticles() {
-		return null;
-	}
 
 	public ResultData writeArticle(int memberId, String title, String body, int boardId) {
 		articleRepository.writeArticle(memberId, title, body, boardId);
@@ -55,6 +49,8 @@ public class ArticleService {
 	}
 
 	public int getArticleCountByBoard(int boardId, String searchKeywordTypeCode, String searchKeyword) {
+		System.err.println(searchKeywordTypeCode);
+		System.err.println(searchKeyword);
 		return articleRepository.getArticleCountByBoard(boardId, searchKeywordTypeCode, searchKeyword);
 	}
 
@@ -82,5 +78,37 @@ public class ArticleService {
 		article.setUsrAuthor(usrAuthor.isSuccess());
 		
 	}
-	
+
+	public int getArticleCountByLike(int isLoginMemberId, String searchKeywordTypeCode, String searchKeyword) {
+		return articleRepository.getArticleCountByLike(isLoginMemberId, searchKeywordTypeCode, searchKeyword);
+	}
+
+	public List<Article> getForPrintLikeArticles(int isLoginMemberId, int listInApage, int page,
+			String searchKeywordTypeCode, String searchKeyword) {
+		int limitTake = listInApage;
+		int limitForm = (page-1)*listInApage;
+		return articleRepository.getForPrintLikeArticles(isLoginMemberId, limitTake, limitForm, searchKeywordTypeCode, searchKeyword);
+	}
+
+	public int getArticleCountByMy(int isLoginMemberId, String searchKeywordTypeCode, String searchKeyword) {
+		return articleRepository.getArticleCountByMy(isLoginMemberId, searchKeywordTypeCode, searchKeyword);
+	}
+
+	public List<Article> getForPrintMyArticles(int isLoginMemberId, int listInApage, int page,
+			String searchKeywordTypeCode, String searchKeyword) {
+		int limitTake = listInApage;
+		int limitForm = (page-1)*listInApage;
+		return articleRepository.getForPrintMyArticles(isLoginMemberId, limitTake, limitForm, searchKeywordTypeCode, searchKeyword);
+	}
+
+	public int getArticleCountByPartId(int partId, String searchKeywordTypeCode, String searchKeyword) {
+		return articleRepository.getArticleCountByPartId(partId ,searchKeywordTypeCode, searchKeyword);
+	}
+
+	public List<Article> getForPrintArticlesByPartId(int partId, int listInApage, int page,
+			String searchKeywordTypeCode, String searchKeyword) {
+		int limitTake = listInApage;
+		int limitForm = (page-1)*listInApage;
+		return articleRepository.getForPrintArticlesByPartId(partId, limitTake, limitForm, searchKeywordTypeCode, searchKeyword);
+	}
 }

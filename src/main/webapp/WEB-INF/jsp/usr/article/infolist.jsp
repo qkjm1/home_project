@@ -32,32 +32,32 @@
 			<div class="h-40"></div>
 			<ul>
 				<li>
-					<a href="">머리</a>
+					<a href="/usr/article/infolist?boardId=2&partId=1">머리</a>
 				</li>
 			</ul>
 			<ul>
 				<li>
-					<a href="">목/어깨</a>
+					<a href="/usr/article/infolist?boardId=2&partId=2">목/어깨</a>
 				</li>
 			</ul>
 			<ul>
 				<li>
-					<a href="">팔</a>
+					<a href="/usr/article/infolist?boardId=2&partId=3">팔</a>
 				</li>
 			</ul>
 			<ul>
 				<li>
-					<a href="">등/허리</a>
+					<a href="/usr/article/infolist?boardId=2&partId=4">등/허리</a>
 				</li>
 			</ul>
 			<ul>
 				<li>
-					<a href="">골반/다리</a>
+					<a href="/usr/article/infolist?boardId=2&partId=5">골반/다리</a>
 				</li>
 			</ul>
 			<ul>
 				<li>
-					<a href="">종아리/발목</a>
+					<a href="/usr/article/infolist?boardId=2&partId=6">종아리/발목</a>
 				</li>
 			</ul>
 			<div class="flex-grow"></div>
@@ -66,13 +66,13 @@
 		<div class="info-box flex flex-col">
 
 			<c:if test="${rq.isLogined() }">
-				<div class="top-[20px] left-0 bg-gray-500">
+				<div class="write">
 					<a class="hover:underline" href="../article/write">글쓰기</a>
 				</div>
 			</c:if>
 
 			<div class="info-box-in flex flex-col">
-				<div class="grid grid-cols-3 gap-1">
+				<div class="grid grid-cols-3 gap-2">
 					<c:forEach var="article" items="${articles}">
 						<div class="p-3 ">
 							<div class="info-title flex justify-between">

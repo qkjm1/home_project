@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.example.demo.vo.Article;
 import com.example.demo.vo.Member;
-import com.example.demo.vo.ResultData;
 
 @Mapper
 public interface MemberRepository {
@@ -17,4 +17,7 @@ public interface MemberRepository {
 	public int  memberJoin(String loginId, String loginPw, String name, String email, String nickname,
 			String cellphoneNum);
 
+	// id로 전체 셀렉
+	public Member memberByIntId(int loginId);
+		
 }

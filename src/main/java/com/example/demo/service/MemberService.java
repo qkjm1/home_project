@@ -5,16 +5,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import com.example.demo.repository.ArticleRepository;
+import com.example.demo.repository.BookmarkRepository;
 import com.example.demo.repository.MemberRepository;
+import utill.Ut;
+import com.example.demo.vo.Article;
 import com.example.demo.vo.Member;
 import com.example.demo.vo.ResultData;
 
-import utill.Ut;
-
 @Service
 public class MemberService {
-	
+
 	@Autowired
 	private MemberRepository memberRepository;
 
@@ -51,5 +52,12 @@ public class MemberService {
 		Member member = memberById(loginId);
 		return member;
 	}
+
+
+	public Member memberByIntId(int loginId) {
+		return memberRepository.memberByIntId(loginId);
+	}
+
+
 
 }

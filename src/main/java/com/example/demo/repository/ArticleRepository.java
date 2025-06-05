@@ -5,12 +5,10 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.example.demo.vo.Article;
-import com.example.demo.vo.Member;
-import com.example.demo.vo.ResultData;
 
 @Mapper
 public interface ArticleRepository {
-
+	
 	public int writeArticle(int memberId, String title, String body, int boardId);
 
 	public int lastInsertId();
@@ -27,4 +25,19 @@ public interface ArticleRepository {
 			String searchKeyword);
 
 	public Article getForPrintArticle(int articleId);
+
+	public int getArticleCountByLike(int isLoginMemberId, String searchKeywordTypeCode, String searchKeyword);
+
+	public List<Article> getForPrintLikeArticles(int isLoginMemberId, int limitTake, int limitForm,
+			String searchKeywordTypeCode, String searchKeyword);
+
+	public int getArticleCountByMy(int isLoginMemberId, String searchKeywordTypeCode, String searchKeyword);
+
+	public List<Article> getForPrintMyArticles(int isLoginMemberId, int limitTake, int limitForm,
+			String searchKeywordTypeCode, String searchKeyword);
+
+	public int getArticleCountByPartId(int partId, String searchKeywordTypeCode, String searchKeyword);
+
+	public List<Article> getForPrintArticlesByPartId(int partId, int limitTake, int limitForm,
+			String searchKeywordTypeCode, String searchKeyword);
 }

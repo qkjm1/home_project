@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="/resource/main.css" />
 <div class="contain mx-auto flex flex-col">
 	<div class="main_1-box flex justify-center mx-auto">
+		<div id="info-box" class="show">Arms 클릭됨!</div>
 		<div id="webgl-container"></div>
 	</div>
 	<div class="main-line"></div>
@@ -32,22 +33,20 @@
 					<div>1</div>
 					<div>2</div>
 					<div>3</div>
-					<div>4</div>
 				</div>
 				<div class="flex info-box-bot">
 					<div>11</div>
 					<div>22</div>
 					<div>33</div>
-					<div>44</div>
 				</div>
 			</div>
-			<div class="flex-grow">3</div>
+			<div class="flex-grow"></div>
 		</div>
 	</div>
 </div>
 
 
-  <script type="importmap">
+<script type="importmap">
     {
       "imports": {
         "three": "https://unpkg.com/three@0.141.0/build/three.module.js",
@@ -57,6 +56,19 @@
     }
   </script>
 
-	<script type="module" src="/resource/00_TEST.js"></script>
+<script type="module" src="/resource/00_TEST.js"></script>
+</body>
+</html>
+<script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.141.0/build/three.module.js",
+        "GLTFLoader": "https://unpkg.com/three@0.141.0/examples/jsm/loaders/GLTFLoader.js",
+        "OrbitControls": "https://unpkg.com/three@0.141.0/examples/jsm/controls/OrbitControls.js"
+      }
+    }
+  </script>
+
+<script type="module" src="/resource/00_TEST.js"></script>
 </body>
 </html>

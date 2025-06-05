@@ -88,3 +88,17 @@ body {
 	border-color: #007BFF; /* 포커스 시 파란색 */
 	box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
 }
+
+.show {
+	width: 100px;
+	height: 100px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+    transition: opacity 0.3s ease;
+}

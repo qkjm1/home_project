@@ -52,5 +52,4 @@
 		L.usrId = #{usrId};
 	</select>
 
-
 </mapper>
