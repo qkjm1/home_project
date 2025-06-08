@@ -38,22 +38,11 @@ loader.load('/models/Low_Part.glb', function (gltf) {
 	model = gltf.scene;
 	scene.add(model);
 
-	model.position.set(0, 0, 0);
+	model.position.set(1,1,1);
 
 	model.traverse((child) => {
 		if (child.isMesh) {
 			child.userData.name = child.name;
-
-			// 부위별 색상 지정
-			if (child.name === 'Neck') {
-				child.material = new THREE.MeshStandardMaterial({ color: 0xf8c471 }); // 주황
-			} else if (child.name === 'Legs') {
-				child.material = new THREE.MeshStandardMaterial({ color: 0x85c1e9 }); // 파랑
-			} else if (child.name === 'Arms') {
-				child.material = new THREE.MeshStandardMaterial({ color: 0xa9dfbf }); // 초록
-			} else {
-				child.material = new THREE.MeshStandardMaterial({ color: 0xffffff }); // 기본
-			}
 		}
 	});
 }, undefined, function (error) {
