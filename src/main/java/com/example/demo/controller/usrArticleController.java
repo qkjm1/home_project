@@ -18,6 +18,7 @@ import com.example.demo.vo.ResultData;
 import com.example.demo.vo.Rq;
 
 import jakarta.servlet.http.HttpServletRequest;
+import utill.Ut;
 
 @Controller
 public class usrArticleController {
@@ -44,11 +45,15 @@ public class usrArticleController {
 	
 	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
-	public ResultData doWrite(HttpServletRequest req, String title, String body, int boardId) {
+	public String doWrite(HttpServletRequest req, String title, String body, int boardId, int partId) {
+		System.err.println("로그인id: "+rq.getIsLoginMemberId());
+		System.err.println("title: "+title);
+		System.err.println("body: "+body);
+		System.err.println("boardId: "+boardId);
+		System.err.println("partId: "+partId);
+		ResultData doWriteRd = articleService.writeArticle(rq.getIsLoginMemberId(), title, body, boardId, partId);
 
-		ResultData doWriteRd = articleService.writeArticle(rq.getIsLoginMemberId(), title, body, boardId);
-
-		return ResultData.from(doWriteRd.getResultCode(), doWriteRd.getMsg());
+		return Ut.jsReplace(doWriteRd.getResultCode(), doWriteRd.getMsg(), "/usr/article/infolist?boardId="+boardId+"&partId="+partId);
 	}
 
 	@RequestMapping("/usr/article/write")
@@ -58,25 +63,25 @@ public class usrArticleController {
 
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
-	public ResultData doModify(HttpServletRequest req, int usrId, String title, String body, int articleId) {
+	public String doModify(HttpServletRequest req, int usrId, String title, String body, int articleId) {
 
 		Article article = articleService.articleRowById(articleId);
 
 		if (article == null) {
-			return ResultData.from("F-1", "없는 게시글");
+			return Ut.f("F-1", "없는 게시글");
 		}
 
 		ResultData usrAuthor = articleService.usrAuthor(usrId, article);
 
 		if (usrAuthor.isFail()) {
-			return ResultData.from(usrAuthor.getResultCode(), usrAuthor.getMsg());
+			return Ut.f(usrAuthor.getResultCode(), usrAuthor.getMsg());
 		}
 
 		if (usrAuthor.isSuccess()) {
 			articleService.modifyArticle(articleId, title, body);
 		}
 
-		return ResultData.from(usrAuthor.getResultCode(), usrAuthor.getMsg());
+		return Ut.f(usrAuthor.getResultCode(), usrAuthor.getMsg());
 	}
 
 	@RequestMapping("/usr/article/doDelete")

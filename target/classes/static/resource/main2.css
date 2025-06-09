@@ -1,0 +1,43 @@
+.qna-con {
+	border-radius: 8px;
+	background-color: white;
+	width: 73%;
+	margin-top: 20px;
+}
+
+.qna-box {
+	position: relative;
+	height: 120px;
+	margin-top: 50px;
+	border-top: 2px solid black;
+}
+
+.qna-title {
+	height: 35px;
+	margin: 10px 0px 10px 15px;
+	width: 95%;
+	background-color: white;
+}
+
+.qna-body {
+	border-radius: 8px; /* 둥글게 */
+	padding: 10px;
+	width: 90%;
+	margin-left: 15px;
+	background-color: #F5F5F5;
+	height: 70%;
+	white-space: normal;
+	overflow: hidden;
+}
+
+.qna-open {
+	position: absolute;
+	right: 15px;
+	top: 70%;
+}
+
+.noAr {
+	align-content:center;
+	color: white;
+	height: 100%
+}

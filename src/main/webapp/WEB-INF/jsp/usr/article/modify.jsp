@@ -8,5 +8,4 @@
 <body>
 	<div>123123</div>
 
-</body>
-</html>
+<%@ include file="../common/poot.jspf"%>>

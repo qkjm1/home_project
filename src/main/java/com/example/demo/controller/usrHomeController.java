@@ -13,12 +13,17 @@ public class usrHomeController {
 	}
 	
 	@RequestMapping("/")
-	public String demo() {
+	public String main2() {
 		return "/usr/home/main";
 	}
 	
 	@RequestMapping("/demo")
-	public String dddemo() {
+	public String demo() {
 		return "/usr/demo";
+	}
+	
+	@RequestMapping("/demo2")
+	public String demo2() {
+		return "/usr/demo2";
 	}
 }

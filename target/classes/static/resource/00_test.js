@@ -8,8 +8,8 @@ const container = document.getElementById('webgl-container');
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xdddddd);
 
-const width = 900;
-const height = 1260;
+const width = window.innerWidth;
+const height = window.innerHeight;
 
 const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
 camera.position.set(5, 5, 5);
@@ -34,18 +34,20 @@ scene.add(ambientLight);
 const loader = new GLTFLoader();
 let model; // 모델을 클릭 이벤트에서 사용하기 위해 전역 변수로
 
-loader.load('/models/Low_Part.glb', function (gltf) {
+loader.load('/models/Low_Part.glb', function(gltf) {
 	model = gltf.scene;
 	scene.add(model);
 
-	model.position.set(1,1,1);
+	model.position.set(1, 1, 1);
 
 	model.traverse((child) => {
 		if (child.isMesh) {
+			console.log('Mesh Loaded:', child.name);
 			child.userData.name = child.name;
+			child.visible = true;
 		}
 	});
-}, undefined, function (error) {
+}, undefined, function(error) {
 	console.error('모델 로딩 중 오류 발생:', error);
 });
 
@@ -54,8 +56,9 @@ const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
 window.addEventListener('click', (event) => {
-	mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-	mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+	const rect = renderer.domElement.getBoundingClientRect();
+	mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+	mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
 
 	raycaster.setFromCamera(mouse, camera);
 
@@ -64,20 +67,11 @@ window.addEventListener('click', (event) => {
 
 		if (intersects.length > 0) {
 			const clickedPart = intersects[0].object;
-			const partName = clickedPart.userData.name;
+			const partName = clickedPart.name;
 			console.log('Clicked:', partName);
-
-
-			const showEl = document.getElementById('info-box');
-			if (showEl) {
-				showEl.style.display = 'block';
-				showEl.classList.add('show');
-
-				setTimeout(() => {
-					showEl.style.display = 'none';
-					showEl.classList.remove('show');
-				}, 2000);
-			}
+			
+			$('.show').removeClass('active');
+			$('.show.' + partName).toggleClass('active');
 		}
 	}
 });
@@ -96,3 +90,4 @@ function animate() {
 	renderer.render(scene, camera);
 }
 animate();
+

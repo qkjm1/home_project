@@ -24,5 +24,4 @@
 		<input type="submit" value="하트하트" />
 	</form>
 
-</body>
-</html>
+<%@ include file="../common/poot.jspf"%>

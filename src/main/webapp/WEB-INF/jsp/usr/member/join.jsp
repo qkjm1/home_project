@@ -6,6 +6,7 @@
 
 <title>JOIN</title>
 <link rel="stylesheet" href="/resource/common.css" />
+<div class="top-boundry-box"></div>
 <div class="contents-box">
 	<div class="signup-box flex">
 		<form action="/usr/member/dojoin" method="POST" onsubmit="return validatePasswords();">
@@ -61,3 +62,5 @@
 		return location.replace('/usr/member/dojoin');
 	}
 </script>
+
+<%@ include file="../common/poot.jspf"%>

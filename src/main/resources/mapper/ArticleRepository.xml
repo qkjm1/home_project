@@ -15,7 +15,8 @@
 		#{boardId},
 		title =
 		#{title},
-		`body` = #{body}
+		`body` = #{body},
+		partId = #{partId}
 	</insert>
 
 	<!-->게시들 id 기준으로 수정</! -->
