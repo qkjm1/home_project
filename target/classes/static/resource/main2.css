@@ -1,33 +1,56 @@
+.show {
+	overflow: auto;
+	font-size: 10px;
+	padding: 17px 5px 20px 5px;
+}
+
 .qna-con {
 	border-radius: 8px;
 	background-color: white;
-	width: 73%;
-	margin-top: 20px;
+	width: 90%;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 .qna-box {
+	padding: 5px;
+	border-radius: 8px; /* 둥글게 */
+	width: 100%;
 	position: relative;
-	height: 120px;
-	margin-top: 50px;
-	border-top: 2px solid black;
+	height: 160px;
 }
 
 .qna-title {
 	height: 35px;
-	margin: 10px 0px 10px 15px;
-	width: 95%;
+	width: 100%;
 	background-color: white;
 }
 
+
+.qna-title>div:first-child {
+	width: 58%;
+}
+
+.qna-title>div:first-child > a {
+	width: 100%;
+	display: block;
+	white-space: nowrap;      
+	overflow: hidden; /* 넘치는 부분 숨김 */
+	text-overflow: ellipsis;
+}
+
 .qna-body {
+	font-size:13px;
+	padding: 5px;
 	border-radius: 8px; /* 둥글게 */
-	padding: 10px;
-	width: 90%;
-	margin-left: 15px;
+	width: 100%;
 	background-color: #F5F5F5;
-	height: 70%;
-	white-space: normal;
-	overflow: hidden;
+	height: 60%;
+	overflow-y: auto;
+}
+
+.qna-body>a {
+	display: block;
 }
 
 .qna-open {
@@ -37,7 +60,12 @@
 }
 
 .noAr {
-	align-content:center;
+	align-content: center;
 	color: white;
 	height: 100%
+}
+
+.partLine {
+	border: 1px solid black;
+	margin: 5px;
 }

@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -183,6 +185,53 @@ public class usrArticleController {
 		model.addAttribute("searchKeyword", searchKeyword);
 
 		return "/usr/article/infolist";
+	}
+
+	
+	@RequestMapping("/usr/article/infomainlist")
+	@ResponseBody
+	public Map<String, Object> showMainInfoList(
+	        HttpServletRequest req, Model model,
+	        @RequestParam(defaultValue = "2") int boardId,
+	        @RequestParam(defaultValue = "1") int partId,
+	        @RequestParam(defaultValue = "1") int page,
+	        @RequestParam(defaultValue = "info") String searchKeywordTypeCode,
+	        @RequestParam(defaultValue = "") String searchKeyword) throws IOException {
+
+	    System.err.println("partId : "+partId);
+
+	    if (boardId != 0) {
+	        Board board = boardService.getBoardById(boardId);
+	        if (board == null) {
+	            Map<String, Object> error = new HashMap<>();
+	            error.put("error", "존재하지 않는 게시판");
+	            return error;
+	        }
+	    }
+
+	    Board board = boardService.getBoardById(boardId);
+
+	    int listInApage = 6;
+
+	    int getArticleCountByPartId = articleService.getArticleCountByPartId(partId, searchKeywordTypeCode, searchKeyword);
+	    System.err.println("getArticleCountByPartId: "+getArticleCountByPartId);
+	    int totalPage = (int) Math.ceil(getArticleCountByPartId / (double) listInApage);
+	    System.err.println("totalPage: "+totalPage);
+
+	    List<Article> articles = articleService.getForPrintArticlesByPartId(partId, listInApage, page, searchKeywordTypeCode,
+	            searchKeyword);
+
+	    Map<String, Object> result = new HashMap<>();
+	    result.put("getArticleCountByPartId", getArticleCountByPartId);
+	    result.put("totalPage", totalPage);
+	    result.put("articles", articles);
+	    result.put("board", board);
+	    result.put("boardId", boardId);
+	    result.put("page", page);
+	    result.put("searchKeywordTypeCode", searchKeywordTypeCode);
+	    result.put("searchKeyword", searchKeyword);
+
+	    return result;
 	}
 
 }

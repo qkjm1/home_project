@@ -11,41 +11,44 @@
 	<div class="main_1-box flex">
 
 		<div class="show Head">
-
-			<div class="flex flex-grow ">
-				<div class="qna-con felx flex-col mx-auto">
-					<c:forEach var="article" items="${articles}">
-						<div class="qna-box">
-							<div class="qna-title mx-auto flex items-center justify-center">
-								<a href="/" class="text-xl font-bold infoArtlce__get">${article.title}</a>
-								<div class="flex-grow"></div>
-								<div class="infoArtlce__get">${article.regDate.substring(0,10)}</div>
-							</div>
-							<div class="qna-body">
-								<a href="detail?articleId=${article.id}" class="infoArtlce__get">${article.body}</a>
-							</div>
-						</div>
-					</c:forEach>
-				</div>
-			</div>
-			<c:if test="${empty articles }">
-				<div class="noAr flex " style="text-align: center;">게시글이 없습니다</div>
-			</c:if>
-
-
+			<div id="article-list1" class="flex flex-col"></div>
 		</div>
-		<div class="show Neck_Shoulder_B">목/어깨 뒤</div>
-		<div class="show Neck_Shoulder_F">목/어깨 앞</div>
-		<div class="show Chest_B">가슴 뒤</div>
-		<div class="show Chest_F">가슴 앞</div>
-		<div class="show Arms">팔</div>
-		<div class="show Legs_B">다리 뒤</div>
-		<div class="show Legs_F">다리 앞</div>
-		<div class="show Pelvic">골반</div>
-		<div class="show Calf">종아리</div>
+		<div class="show Neck_Shoulder_B">
+			<div id="article-list2" class="flex flex-col"></div>
+		</div>
+		<div class="show Neck_Shoulder_F">
+			<div id="article-list2" class="flex flex-col"></div>
+		</div>
+		<div class="show Arms">
+			<div id="article-list3" class="flex flex-col"></div>
+		</div>
+		<div class="show Chest_B">
+			<div id="article-list4" class="flex flex-col"></div>
+		</div>
+		<div class="show Chest_F">
+			<div id="article-list4" class="flex flex-col"></div>
+		</div>
+		<div class="show Legs_B">
+			<div id="article-list5" class="flex flex-col"></div>
+		</div>
+		<div class="show Legs_F">
+			<div id="article-list5" class="flex flex-col"></div>
+		</div>
+		<div class="show Pelvic">
+			<div id="article-list5" class="flex flex-col"></div>
+		</div>
+		<div class="show Calf">
+			<div id="article-list6" class="flex flex-col"></div>
+		</div>
+
+
 
 		<div id="webgl-container"></div>
+
 	</div>
+
+
+
 	<div class="main_2-box">
 		<div class="info-box flex flex-col">
 			<form action="/usr/article/infolist" method="post" class="mx-auto">
@@ -62,19 +65,38 @@
 					</button>
 				</div>
 			</form>
-			<div class="flex-grow mx-auto">
-				<div class="flex info-box-top">
-					<div>1</div>
-					<div>2</div>
-					<div>3</div>
+			<div class="info-box-items grid grid-cols-3 gap-4 max-w-xl mx-auto">
+				<div>
+					<a href="">
+						<img src="../imgs/Head.jpg" alt="머리" />
+					</a>
 				</div>
-				<div class="flex info-box-bot">
-					<div>11</div>
-					<div>22</div>
-					<div>33</div>
+				<div>
+					<a href="">
+						<img src="../imgs/neck_shoulder.png" alt="목/어깨" />
+					</a>
+				</div>
+				<div>
+					<a href="">
+						<img src="../imgs/Arms.jpg" alt="팔" />
+					</a>
+				</div>
+				<div>
+					<a href="">
+						<img src="../imgs/chest.png" alt="몸톰(등허리)" />
+					</a>
+				</div>
+				<div>
+					<a href="">
+						<img src="../imgs/pelvic.png" alt="골반 다리" />
+					</a>
+				</div>
+				<div>
+					<a href="">
+						<img src="../imgs/calf.png" alt="종아리 발" />
+					</a>
 				</div>
 			</div>
-
 		</div>
 	</div>
 	<div class="flex-grow main_3-box"></div>
@@ -94,22 +116,4 @@
 
 <script type="module" src="/resource/00_TEST.js"></script>
 
-<script>
-function InfoArticle__get() {
-	
-	$.get('../article/infolist', {
-		id : params.id,
-		ajaxMode : 'Y'
-	}, function(data) {
-		console.log(data);
-		console.log(data.data1);
-		console.log(data.msg);
-		$('.article-detail__hit-count').html(data.data1);
-	}, 'json');
-}
-
-$(function() {
-	InfoArticle__get();
-
-})
 </script>
