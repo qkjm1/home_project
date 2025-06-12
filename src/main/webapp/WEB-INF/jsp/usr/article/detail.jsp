@@ -1,43 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:set var="pageTitle" value="${board.code} LIST"></c:set>
+<c:set var="pageTitle" value="DETAIL"></c:set>
 <%@ include file="../common/head.jspf"%>
 
 
 <link rel="stylesheet" href="/resource/common.css" />
+<script type="module" src="/resource/ajax.js"></script>
 <div class="top-boundry-box"></div>
 <div class="contain flex flex-col mx-auto">
 
-
-
-	<script>
-		function ArticleDetail__doIncreaseHitCount() {
-
-			const localKey = 'article__' + params.id + '__OnView';
-
-			if (localStorage.getItem(localKey)) {
-				return;
-			}
-			localStorage.setItem(localKey, true);
-
-			$.get('../article/doIncreaseHitCountRd', {
-				id : params.id,
-				ajaxMode : 'Y'
-			}, function(data) {
-				console.log(data);
-				console.log(data.data1);
-				console.log(data.msg);
-				$('.article-detail__hit-count').html(data.data1);
-			}, 'json');
-		}
-
-		$(function() {
-			ArticleDetail__doIncreaseHitCount();
-
-		})
-	</script>
-
+	<form action="../bookmark/doLike" method="POST" id="bookmark__btn">
+		<input type="hidden" name="articleId" value="${article.id}" />
+		<button type="submit">
+			<div>
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="#555" stroke-width="2"
+					viewBox="0 0 24 24">
+  <path d="M7 3a2 2 0 0 0-2 2v16l7-3 7 3V5a2 2 0 0 0-2-2H7z" />
+</svg>
+			</div>
+		</button>
+	</form>
 
 	<section class="mt-24 text-xl px-4">
 		<div class="mx-auto">

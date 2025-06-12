@@ -24,7 +24,7 @@ public class ArticleService {
 
 		int id = articleRepository.lastInsertId();
 
-		return ResultData.from("S-1", Ut.f("%s번 글이 등록되었습니다", id));
+		return ResultData.from("", Ut.f("%s번 글이 등록되었습니다", id));
 	}
 
 	public void delArticle(int articleId) {
@@ -102,8 +102,8 @@ public class ArticleService {
 		return articleRepository.getForPrintMyArticles(isLoginMemberId, limitTake, limitForm, searchKeywordTypeCode, searchKeyword);
 	}
 
-	public int getArticleCountByPartId(int partId, String searchKeywordTypeCode, String searchKeyword) {
-		return articleRepository.getArticleCountByPartId(partId ,searchKeywordTypeCode, searchKeyword);
+	public int getArticleCountByPartId(int boardId, int partId, String searchKeywordTypeCode, String searchKeyword) {
+		return articleRepository.getArticleCountByPartId(boardId, partId ,searchKeywordTypeCode, searchKeyword);
 	}
 
 	public List<Article> getForPrintArticlesByPartId(int partId, int listInApage, int page,
@@ -111,5 +111,13 @@ public class ArticleService {
 		int limitTake = listInApage;
 		int limitForm = (page-1)*listInApage;
 		return articleRepository.getForPrintArticlesByPartId(partId, limitTake, limitForm, searchKeywordTypeCode, searchKeyword);
+	}
+
+	public Article partName(int partId) {
+		return articleRepository.partName(partId);
+	}
+
+	public List<Article> getForPrintArticlesByPartIdNP(int partId) {
+		return articleRepository.getForPrintArticlesByPartIdNP(partId);
 	}
 }

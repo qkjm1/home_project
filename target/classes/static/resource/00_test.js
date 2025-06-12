@@ -10,7 +10,7 @@ scene.background = new THREE.Color(0x494949);
 
 
 const width = window.innerWidth;
-const height = window.innerHeight;
+const height = 1000;
 
 const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
 camera.position.set(0, 3, 8);
@@ -24,6 +24,7 @@ const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.enablePan = false; // 이동 비활성화 (고정)
 controls.enableRotate = false;
+controls.enableZoom = false; //확대축소 막기
 controls.update();
 
 // === Lighting ===
@@ -59,19 +60,20 @@ loader.load('/models/Low_Part.glb', function(gltf) {
 
 const nameToIdMap = {
 	"Head": 1,
-	"Neck_Shoulder_F": 2,
 	"Neck_Shoulder_B": 2,
-	"Arms": 3,
-	"Chest_F": 4,
-	"Chest_B": 4,
-	"Legs_F": 5,
-	"Legs_B": 5,
-	"Pelvic": 5,
-	"calf": 6
+	"Neck_Shoulder_F": 3,
+	"Arms": 4,
+	"Chest_B": 5,
+	"Chest_F": 6,
+	"Pelvic": 7,
+	"Legs_F": 8,
+	"Legs_B": 9,
+	"Calf": 10
 };
 
 function InfoArticle__get(partId) {
 
+	console.log(partId);
 	$.get('/usr/article/infomainlist', {
 		partId: partId,
 		ajaxMode: 'Y'
@@ -89,16 +91,15 @@ function InfoArticle__get(partId) {
 				console.log(articles);
 
 
-				const dateStr = typeof article.regDate === 'string'
-					? article.regDate.substring(0, 10)
-					: new Date(article.regDate).toISOString().substring(0, 10);
+				const dateStr = article.regDate.substring(0, 10);
+
 
 				const html = `
 				<div class="qna-con flex flex-col mx-auto">				
 						<div class="qna-box">
 						<div class="qna-title mx-auto flex items-end justify-center">
 							<div class="flex-grow">	
-								<a href="/" class="text-xl font-bold text-black">${article.title}</a>
+								<a href="#" class="text-xl font-bold text-black">${article.title}</a>
 							</div>
 							<div class="flex-grow"></div>
 							<div class="text-black">작성자:${article.extra__writer}&nbsp&nbsp</div>
@@ -106,7 +107,7 @@ function InfoArticle__get(partId) {
 						</div>
 						<div class="partLine w-100%"></div>		
 						<div class="qna-body text-black">
-						<a href="detail?articleId=${article.id}">${article.body}</a>
+						<a href="/usr/article/detail?articleId=${article.id}">${article.body}</a>
 						</div>
 					</div>
 				</div>
@@ -119,18 +120,7 @@ function InfoArticle__get(partId) {
 	}, 'json');
 }
 
-$(function() {
-	InfoArticle__get(nameToIdMap["Head"]);
-	InfoArticle__get(nameToIdMap["Neck_Shoulder_F"]);
-	InfoArticle__get(nameToIdMap["Neck_Shoulder_B"]);
-	InfoArticle__get(nameToIdMap["Chest_F"]);
-	InfoArticle__get(nameToIdMap["Chest_B"]);
-	InfoArticle__get(nameToIdMap["Arms"]);
-	InfoArticle__get(nameToIdMap["Legs_F"]);
-	InfoArticle__get(nameToIdMap["Legs_B"]);
-	InfoArticle__get(nameToIdMap["Calf"]);
-	InfoArticle__get(nameToIdMap["Pelvic"]);
-})
+
 
 // === Raycaster ===
 const raycaster = new THREE.Raycaster();
@@ -180,6 +170,7 @@ window.addEventListener('click', (event) => {
 				clickedPart.material = clickedPart.material.clone();
 				clickedPart.material.color.set('#EAD292'); // 강조색
 				selectedMesh = clickedPart;
+				console.log(partId);
 			}
 
 			if (partId !== undefined) {
@@ -228,11 +219,11 @@ renderer.domElement.addEventListener('mousemove', (event) => {
 	previousMousePosition.y = event.clientY;
 });
 
+
 // === 반응형 ===
 window.addEventListener('resize', () => {
-	camera.aspect = window.innerWidth / window.innerHeight;
+	camera.aspect = window.innerWidth / height;
 	camera.updateProjectionMatrix();
-	renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
 // === 애니메이션 루프 ===

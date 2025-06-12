@@ -34,6 +34,8 @@ public class usrArticleController {
 	private BoardService boardService;
 	
 	
+	
+	
 	@RequestMapping("/usr/article/detail")
 	public String showDetail(HttpServletRequest req, Model model, int articleId) {
 
@@ -63,6 +65,20 @@ public class usrArticleController {
 		return "usr/article/write";
 	}
 
+	@RequestMapping("/usr/article/modify")
+	public String showModify(HttpServletRequest req, Model model, int id) {
+
+		Article article = articleService.getForPrintArticle(rq.getIsLoginMemberId(), id);
+
+		if (article == null) {
+			return Ut.jsHistoryBack("F-1", Ut.f("%d번 게시글은 없습니다", id));
+		}
+
+		model.addAttribute("article", article);
+
+		return "/usr/article/modify";
+	}
+	
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
 	public String doModify(HttpServletRequest req, int usrId, String title, String body, int articleId) {
@@ -155,6 +171,8 @@ public class usrArticleController {
 			@RequestParam(defaultValue = "info") String searchKeywordTypeCode,
 			@RequestParam(defaultValue = "") String searchKeyword) throws IOException {
 
+		System.err.println("partId : "+partId);
+		
 		// 보드아이디로 있는 게시판인지 확인
 		if (boardId != 0) {
 			Board board = boardService.getBoardById(boardId);
@@ -167,16 +185,19 @@ public class usrArticleController {
 
 		int listInApage = 6;
 
-		int getArticleCountByPartId = articleService.getArticleCountByPartId(partId, searchKeywordTypeCode, searchKeyword);
+		int getArticleCountByPartId = articleService.getArticleCountByPartId(boardId, partId, searchKeywordTypeCode, searchKeyword);
 		System.err.println("getArticleCountByPartId: "+getArticleCountByPartId);
 		int totalPage = (int) Math.ceil(getArticleCountByPartId / (double) listInApage);
 		System.err.println("totalPage: "+totalPage);
 
 		List<Article> articles = articleService.getForPrintArticlesByPartId(partId, listInApage, page, searchKeywordTypeCode,
 				searchKeyword);
+		
+		Article getPartId = articleService.partName(partId);
 
 		model.addAttribute("getArticleCountByPartId", getArticleCountByPartId);
 		model.addAttribute("totalPage", totalPage);
+		model.addAttribute("getPartId", getPartId);
 		model.addAttribute("articles", articles);
 		model.addAttribute("board", board);
 		model.addAttribute("boardId", boardId);
@@ -186,19 +207,16 @@ public class usrArticleController {
 
 		return "/usr/article/infolist";
 	}
-
+	
 	
 	@RequestMapping("/usr/article/infomainlist")
 	@ResponseBody
 	public Map<String, Object> showMainInfoList(
 	        HttpServletRequest req, Model model,
 	        @RequestParam(defaultValue = "2") int boardId,
-	        @RequestParam(defaultValue = "1") int partId,
-	        @RequestParam(defaultValue = "1") int page,
-	        @RequestParam(defaultValue = "info") String searchKeywordTypeCode,
-	        @RequestParam(defaultValue = "") String searchKeyword) throws IOException {
+	        @RequestParam(defaultValue = "0") int partId) throws IOException {
 
-	    System.err.println("partId : "+partId);
+	    System.err.println("showMainPartId : "+partId);
 
 	    if (boardId != 0) {
 	        Board board = boardService.getBoardById(boardId);
@@ -208,30 +226,20 @@ public class usrArticleController {
 	            return error;
 	        }
 	    }
+	    
 
-	    Board board = boardService.getBoardById(boardId);
-
-	    int listInApage = 6;
-
-	    int getArticleCountByPartId = articleService.getArticleCountByPartId(partId, searchKeywordTypeCode, searchKeyword);
-	    System.err.println("getArticleCountByPartId: "+getArticleCountByPartId);
-	    int totalPage = (int) Math.ceil(getArticleCountByPartId / (double) listInApage);
-	    System.err.println("totalPage: "+totalPage);
-
-	    List<Article> articles = articleService.getForPrintArticlesByPartId(partId, listInApage, page, searchKeywordTypeCode,
-	            searchKeyword);
-
+	    List<Article> articles = articleService.getForPrintArticlesByPartIdNP(partId);
+	    
+	    // html에서 오류나도 놀라지말것 내용 호출 확인용
+//	    System.err.println(articles.get(partId));
+	    
 	    Map<String, Object> result = new HashMap<>();
-	    result.put("getArticleCountByPartId", getArticleCountByPartId);
-	    result.put("totalPage", totalPage);
+
 	    result.put("articles", articles);
-	    result.put("board", board);
-	    result.put("boardId", boardId);
-	    result.put("page", page);
-	    result.put("searchKeywordTypeCode", searchKeywordTypeCode);
-	    result.put("searchKeyword", searchKeyword);
 
 	    return result;
 	}
 
+
+	
 }

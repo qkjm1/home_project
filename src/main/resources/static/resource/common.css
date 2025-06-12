@@ -70,7 +70,7 @@ ul, li, a {
 */
 /*   Q&A 게시글 판    */
 .contain {
-	width: 75%;
+	width: 80%;
 	height: 1300px;
 	background-color: white;
 }
@@ -248,6 +248,14 @@ ul, li, a {
 	top: 90px;
 	position: absolute;
 	border-radius: 4px; /* 둥글게 */
+}
+
+.getPartId {
+	font-size:12px;
+	left: 5px;
+	top:100px;
+	position: absolute;
+	border-radius: 4px;
 }
 
 .paging {
