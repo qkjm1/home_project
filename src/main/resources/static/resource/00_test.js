@@ -224,6 +224,7 @@ renderer.domElement.addEventListener('mousemove', (event) => {
 window.addEventListener('resize', () => {
 	camera.aspect = window.innerWidth / height;
 	camera.updateProjectionMatrix();
+	renderer.setSize(window.innerWidth, height);
 });
 
 // === 애니메이션 루프 ===

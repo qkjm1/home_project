@@ -12,6 +12,6 @@
 		FROM board
 		WHERE id = #{id} AND delStatus = 0
 	</select>
-
+	
 	
 </mapper>

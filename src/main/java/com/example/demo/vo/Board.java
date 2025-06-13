@@ -20,4 +20,5 @@ public class Board {
 	private boolean delStatus;
 	private LocalDateTime delDate;
 
+
 }

@@ -28,6 +28,4 @@ public class Member {
 
 	private String google_loginId;
 	private String kakao_loginId;
-	
-	
 }

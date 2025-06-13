@@ -11,25 +11,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Article {
+public class Info {
 
 	private int id;
-	private String regDate;
-	private String updateDate;
-	private String title;
+	private String part;
 	private String body;
 	
-	private int usrId;
-	private int boardId;
-	private int hitCount;
-	private int goodRp;
-	private int partId;
-
 	private boolean delStatus;
 	private LocalDateTime delDate;
 
-	private boolean usrAuthor;
-	
-	private String extra__writer;
-	private String part__name;
 }

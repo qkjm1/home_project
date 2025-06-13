@@ -56,8 +56,7 @@ CREATE TABLE info (
 
 CREATE TABLE anatomy (
 id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-part CHAR(50) NOT NULL UNIQUE COMMENT '상하체의 하위분류',
-ovrall CHAR(50) NOT NULL
+part CHAR(50) NOT NULL UNIQUE COMMENT '상하체의 하위분류'
 );
 
 CREATE TABLE `like` (
@@ -104,33 +103,46 @@ email = '33@naver.com';
 
 INSERT INTO anatomy
 SET
-ovrall = 'upper',
 part = '머리';
 
-INSERT INTO anatomy
-SET
-ovrall = 'upper',
-part = '목/어깨';
 
 INSERT INTO anatomy
 SET
-ovrall = 'upper',
+part = '목/뒤쪾어깨';
+
+INSERT INTO anatomy
+SET
+part = '쇄골/앞쪽어깨';
+
+INSERT INTO anatomy
+SET
 part = '팔';
 
 INSERT INTO anatomy
 SET
-ovrall = 'upper',
 part = '등/허리';
 
 INSERT INTO anatomy
 SET
-ovrall = 'lower',
-part = '골반/다리';
+part = '가슴,배';
 
 INSERT INTO anatomy
 SET
-ovrall = 'lower',
+part = '골반';
+
+
+INSERT INTO anatomy
+SET
+part = '다리앞쪽';
+
+INSERT INTO anatomy
+SET
+part = '다리뒤쪽';
+
+INSERT INTO anatomy
+SET
 part = '종아리/발목';
+
 
 INSERT INTO article
 SET

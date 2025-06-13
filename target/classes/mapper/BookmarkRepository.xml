@@ -7,6 +7,8 @@
 <mapper
 	namespace="com.example.demo.repository.BookmarkRepository">
 
+
+
 	<!-->인설트</! -->
 	<insert id="saveLike">
 		INSERT INTO `like`
@@ -51,5 +53,6 @@
 		WHERE
 		L.usrId = #{usrId};
 	</select>
+
 
 </mapper>
