@@ -3,13 +3,12 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-
 <mapper
 	namespace="com.example.demo.repository.BookmarkRepository">
 
 
 
-	<!-->인설트</! -->
+		<!-->인설트</! -->
 	<insert id="saveLike">
 		INSERT INTO `like`
 		SET
@@ -56,7 +55,7 @@
 	</select>
 
 	<!-->유저id 기준, 글에 좋아요를 했는지 한줄가져오기</! -->
-	<select id="likeByUsrid">
+	<select id="isBookmarked">
 		SELECT COUNT(*)
 		FROM `like` L
 		INNER JOIN `user` U
@@ -67,5 +66,6 @@
 		AND
 		U.id = #{usrId};
 	</select>
+
 
 </mapper>

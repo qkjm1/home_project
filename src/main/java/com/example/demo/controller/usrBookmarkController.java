@@ -38,7 +38,7 @@ public class usrBookmarkController {
 		if(likeRow==1) {
 			bookmarkService.delLike(rq.getIsLoginMemberId(), articleId);
 			
-			return ResultData.from("S-1", "즐찾취소");
+			return ResultData.from("FS-1", "즐찾취소");
 		} 
 		if(likeRow==0) {
 			ResultData saveLike  = bookmarkService.saveLike(rq.getIsLoginMemberId(), articleId);
@@ -46,11 +46,11 @@ public class usrBookmarkController {
 			return ResultData.from(saveLike.getResultCode(),saveLike.getMsg(),"saveLike",saveLike);
 		}
 	
-		return ResultData.from("F-1", "처리실패");
+		return null;
 	}
 	
 	@RequestMapping("/usr/bookmark/like")
-	public String isBookmarked() {
+	public String showLike() {
 	
 		return "/usr/bookmark/like";
 	}

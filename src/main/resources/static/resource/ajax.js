@@ -1,3 +1,5 @@
+
+
 $(document).ready(function() {
 	$("#bookmark__btn").on("submit", function(e) {
 		e.preventDefault();
@@ -14,9 +16,9 @@ $(document).ready(function() {
 				console.log(response);
 
 				if (resultCode.startsWith("S")) {
-					$("#bookmark__icon").css("stroke", "#EAD292");
+					$("#bookmark__icon").addClass('bookmark__icon_col');
 				} else {
-					$("#bookmark__icon").css("stroke", "#555");
+					$("#bookmark__icon").removeClass('bookmark__icon_col');
 				}
 			},
 			error: function(xhr, status, error) {

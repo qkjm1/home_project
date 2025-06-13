@@ -10,6 +10,8 @@ import com.example.demo.repository.BookmarkRepository;
 import com.example.demo.vo.Article;
 import com.example.demo.vo.ResultData;
 
+import utill.Ut;
+
 @Service
 public class BookmarkService {
 
@@ -45,9 +47,9 @@ public class BookmarkService {
 
 	// 유저고유번호랑 글아이디로 한줄 가지고오기
 	public int likeRow(int usrId, int articleId) {
-		System.err.println("==2==");
+
 		int likeRow = bookmarkRepository.likeRow(usrId, articleId);
-		System.err.println("==3==");
+
 		return likeRow;
 	}
 
@@ -56,11 +58,20 @@ public class BookmarkService {
 		return bookmarkRepository.likeByUsrid(usrId);
 	}
 
-	public int isBookmarked(int usrId, int articleId) {
+	
+	public ResultData isBookmarked(int usrId, int articleId) {
+		int isBookmarked = bookmarkRepository.isBookmarked(usrId, articleId);
+		
+		if (isBookmarked != 1) {
+			
+			return ResultData.from("F-A", Ut.f("즐찾안되어있음"));
+		}
+		
+		if (isBookmarked == 1) {
+			return ResultData.from("S-1", Ut.f("즐찾되어있음"));
+		}
 
-		return bookmarkRepository.isBookmarked(usrId, articleId);
+		return ResultData.from("S-1", Ut.f("즐찾되어있음"));
 	}
-
-
 
 }

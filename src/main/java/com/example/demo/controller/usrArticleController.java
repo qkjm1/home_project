@@ -43,9 +43,9 @@ public class usrArticleController {
 
 		Article article = articleService.getForPrintArticle(rq.getIsLoginMemberId(), articleId);
 		
-		int isBookmarked = bookmarkService.isBookmarked(rq.getIsLoginMemberId(),articleId);
-		
-		model.addAttribute("isBookmarked", isBookmarked); // 좋아요를 했는지 안했는지
+		ResultData isBookmarkedRD = bookmarkService.isBookmarked(rq.getIsLoginMemberId(), articleId);
+		System.out.println("++++===="+isBookmarkedRD.isSuccess());
+		model.addAttribute("isBookmarked", isBookmarkedRD.isSuccess()); // 좋아요를 했는지 안했는지		
 		model.addAttribute("article", article);
 		
 		return "usr/article/detail";

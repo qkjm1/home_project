@@ -73,6 +73,7 @@ ul, li, a {
 	width: 80%;
 	height: 1300px;
 	background-color: white;
+	position: relative;
 }
 
 .top-boundry-box {
@@ -279,6 +280,8 @@ ul, li, a {
 }
 
 /* 북마크 부분 */
-.bookmark__icon_S {
-	color: #EAD292;
+
+
+.bookmark__icon_col {
+	stroke: #EAD292;
 }

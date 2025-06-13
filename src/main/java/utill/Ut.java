@@ -4,8 +4,9 @@ import java.lang.reflect.Array;
 import java.util.Map;
 
 public class Ut {
-	
+
 	public static String jsReplace(String resultCode, String msg, String replaceUri) {
+
 		if (resultCode == null) {
 			resultCode = "";
 		}
@@ -18,7 +19,7 @@ public class Ut {
 			replaceUri = "/";
 		}
 
-		String resultMsg = resultCode + " / " + msg;
+		String resultMsg = resultCode + msg;
 
 		return Ut.f("""
 				<script>
@@ -42,7 +43,7 @@ public class Ut {
 			msg = "";
 		}
 
-		String resultMsg = resultCode + " / " + msg;
+		String resultMsg = resultCode  + msg;
 
 		return Ut.f("""
 				<script>
@@ -56,37 +57,34 @@ public class Ut {
 				</script>
 				""", resultMsg);
 	}
-	
-	
+
 	public static boolean isEmptyOrNull(String str) {
-		return str == null || str.trim().length() == 0;	
+		return str == null || str.trim().length() == 0;
 	}
-	
+
 	public static boolean isEmpty(Object obj) {
-		
+
 		if (obj == null) {
 			return true;
 		}
-		
+
 		if (obj instanceof String) {
 			return ((String) obj).trim().length() == 0;
 		}
-		
+
 		if (obj instanceof Map) {
-			return ((Map<?,?>) obj).isEmpty();
+			return ((Map<?, ?>) obj).isEmpty();
 		}
-		
+
 		if (obj.getClass().isArray()) {
-			return Array.getLength(obj)==0;
+			return Array.getLength(obj) == 0;
 		}
-		
+
 		return false;
-		
 	}
-	
-	public static String f(String str, Object...args) {
-		return String.format(str, args);
+
+	public static String f(String string, Object... args) {
+		return String.format(string, args);
 	}
-	
 
 }
