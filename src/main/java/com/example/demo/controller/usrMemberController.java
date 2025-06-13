@@ -107,11 +107,10 @@ public class usrMemberController {
 	}
 
 	@RequestMapping("/usr/member/myPage/likepage")
-	public String likeList(Model model, HttpServletRequest req, String loginId) {
+	public String likeList(Model model, HttpServletRequest req) {
 		System.err.println(rq.getIsLoginMemberId());
-		System.err.println(loginId);
 
-		List<Article> likeArticles = bookmarkService.likeByUsrid(loginId);
+		List<Article> likeArticles = bookmarkService.likeByUsrid(rq.getIsLoginMemberId());
 
 		for (Article article : likeArticles) {
 			System.out.println(article.getBody());

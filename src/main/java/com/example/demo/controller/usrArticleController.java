@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.service.ArticleService;
 import com.example.demo.service.BoardService;
+import com.example.demo.service.BookmarkService;
 import com.example.demo.vo.Article;
 import com.example.demo.vo.Board;
 import com.example.demo.vo.ResultData;
@@ -33,7 +34,8 @@ public class usrArticleController {
 	@Autowired
 	private BoardService boardService;
 	
-	
+	@Autowired
+	private BookmarkService bookmarkService;
 	
 	
 	@RequestMapping("/usr/article/detail")
@@ -41,6 +43,9 @@ public class usrArticleController {
 
 		Article article = articleService.getForPrintArticle(rq.getIsLoginMemberId(), articleId);
 		
+		int isBookmarked = bookmarkService.isBookmarked(rq.getIsLoginMemberId(),articleId);
+		
+		model.addAttribute("isBookmarked", isBookmarked); // 좋아요를 했는지 안했는지
 		model.addAttribute("article", article);
 		
 		return "usr/article/detail";

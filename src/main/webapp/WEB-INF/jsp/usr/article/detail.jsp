@@ -9,19 +9,27 @@
 <script type="module" src="/resource/ajax.js"></script>
 <div class="top-boundry-box"></div>
 <div class="contain flex flex-col mx-auto">
-
-	<form action="../bookmark/doLike" method="POST" id="bookmark__btn">
-		<input type="hidden" name="articleId" value="${article.id}" />
-		<button type="submit">
-			<div>
-				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="#555" stroke-width="2"
-					viewBox="0 0 24 24">
+	<div>
+		<form action="../bookmark/doLike" method="POST" id="bookmark__btn">
+			<input type="hidden" name="articleId" value="${article.id}" />
+			<button type="submit">
+				<div>
+					<c:if test="${isBookmarked == 1}">
+						<svg class="bookmark__icon_S" id="bookmark__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="#555"
+							stroke-width="2" viewBox="0 0 24 24">
   <path d="M7 3a2 2 0 0 0-2 2v16l7-3 7 3V5a2 2 0 0 0-2-2H7z" />
 </svg>
-			</div>
-		</button>
-	</form>
-
+					</c:if>
+					<c:if test="${isBookmarked != 1}">
+						<svg class="bookmark__icon_F" id="bookmark__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="#555"
+							stroke-width="2" viewBox="0 0 24 24">
+  <path d="M7 3a2 2 0 0 0-2 2v16l7-3 7 3V5a2 2 0 0 0-2-2H7z" />
+</svg>
+					</c:if>
+				</div>
+			</button>
+		</form>
+	</div>
 	<section class="mt-24 text-xl px-4">
 		<div class="mx-auto">
 			<table class="table" border="1" cellspacing="0" cellpadding="5" style="width: 100%; border-collapse: collapse;">

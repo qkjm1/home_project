@@ -51,9 +51,14 @@ public class BookmarkService {
 		return likeRow;
 	}
 
-	public List<Article> likeByUsrid(String usrId) {
+	public List<Article> likeByUsrid(int usrId) {
 
 		return bookmarkRepository.likeByUsrid(usrId);
+	}
+
+	public int isBookmarked(int usrId, int articleId) {
+
+		return bookmarkRepository.isBookmarked(usrId, articleId);
 	}
 
 

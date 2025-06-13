@@ -46,11 +46,11 @@ public class usrBookmarkController {
 			return ResultData.from(saveLike.getResultCode(),saveLike.getMsg(),"saveLike",saveLike);
 		}
 	
-		return null;
+		return ResultData.from("F-1", "처리실패");
 	}
 	
 	@RequestMapping("/usr/bookmark/like")
-	public String showLike() {
+	public String isBookmarked() {
 	
 		return "/usr/bookmark/like";
 	}
