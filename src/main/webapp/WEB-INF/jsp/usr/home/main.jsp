@@ -9,41 +9,76 @@
 <link rel="stylesheet" href="/resource/main2.css" />
 <div class="contain mx-auto flex flex-col">
 	<div class="main_1-box flex">
-
-		<div class="show Head">
-			<div id="article-list1" class="flex flex-col"></div>
-		</div>
-		<div class="show Neck_Shoulder_B">
-			<div id="article-list2" class="flex flex-col"></div>
-		</div>
-		<div class="show Neck_Shoulder_F">
-			<div id="article-list3" class="flex flex-col"></div>
-		</div>
-		<div class="show Arms">
-			<div id="article-list4" class="flex flex-col"></div>
-		</div>
-		<div class="show Chest_B">
-			<div id="article-list5" class="flex flex-col"></div>
-		</div>
-		<div class="show Chest_F">
-			<div id="article-list6" class="flex flex-col"></div>
-		</div>
-		<div class="show Legs_B">
-			<div id="article-list7" class="flex flex-col"></div>
-		</div>
-		<div class="show Legs_F">
-			<div id="article-list8" class="flex flex-col"></div>
-		</div>
-		<div class="show Pelvic">
-			<div id="article-list9" class="flex flex-col"></div>
-		</div>
-		<div class="show Calf">
-			<div id="article-list10" class="flex flex-col"></div>
+		<div class="main_1-box1 flex">
+			<div class="show Head">
+				<div id="article-list1" class="flex flex-col"></div>
+			</div>
+			<div class="show Neck_Shoulder_B">
+				<div id="article-list2" class="flex flex-col"></div>
+			</div>
+			<div class="show Neck_Shoulder_F">
+				<div id="article-list3" class="flex flex-col"></div>
+			</div>
+			<div class="show Arms">
+				<div id="article-list4" class="flex flex-col"></div>
+			</div>
+			<div class="show Chest_B">
+				<div id="article-list5" class="flex flex-col"></div>
+			</div>
+			<div class="show Chest_F">
+				<div id="article-list6" class="flex flex-col"></div>
+			</div>
+			<div class="show Legs_B">
+				<div id="article-list7" class="flex flex-col"></div>
+			</div>
+			<div class="show Legs_F">
+				<div id="article-list8" class="flex flex-col"></div>
+			</div>
+			<div class="show Pelvic">
+				<div id="article-list9" class="flex flex-col"></div>
+			</div>
+			<div class="show Calf">
+				<div id="article-list10" class="flex flex-col"></div>
+			</div>
 		</div>
 
 		<div id="webgl-container"></div>
 
+		<div class="main_1-box2 flex">
+			<div class="show Head">
+				<div id="article-list1" class="flex flex-col"></div>
+			</div>
+			<div class="show Neck_Shoulder_B">
+				<div id="article-list2" class="flex flex-col"></div>
+			</div>
+			<div class="show Neck_Shoulder_F">
+				<div id="article-list3" class="flex flex-col"></div>
+			</div>
+			<div class="show Arms">
+				<div id="article-list4" class="flex flex-col"></div>
+			</div>
+			<div class="show Chest_B">
+				<div id="article-list5" class="flex flex-col"></div>
+			</div>
+			<div class="show Chest_F">
+				<div id="article-list6" class="flex flex-col"></div>
+			</div>
+			<div class="show Legs_B">
+				<div id="article-list7" class="flex flex-col"></div>
+			</div>
+			<div class="show Legs_F">
+				<div id="article-list8" class="flex flex-col"></div>
+			</div>
+			<div class="show Pelvic">
+				<div id="article-list9" class="flex flex-col"></div>
+			</div>
+			<div class="show Calf">
+				<div id="article-list10" class="flex flex-col"></div>
+			</div>
+		</div>
+
 	</div>
+	<div class="main_line_1-2"></div>
 	<div class="main_2-box">
 		<div class="info-box flex flex-col">
 			<form action="/usr/article/infolist" method="post" class="mx-auto">
@@ -114,6 +149,7 @@
 			</div>
 		</div>
 	</div>
+	<div class="main_line_2-3"></div>
 	<div class="flex-grow main_3-box"></div>
 </div>
 <%@ include file="../common/poot.jspf"%>

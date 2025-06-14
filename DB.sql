@@ -266,7 +266,61 @@ usrId = 3,
 partId = 1,
 boardId = 3;
 
+#############
 
+
+-- 두통 관련
+INSERT INTO article
+SET regDate = NOW(), updateDate = NOW(),
+title = "긴장성 두통이란?",
+`body` = "긴장성 두통은 가장 흔한 유형의 두통으로, 주로 스트레스나 불안으로 인해 발생하며 머리에 띠를 두른 듯한 압박감을 느끼게 된다.",
+usrId = 3, partId = 1, boardId = 2;
+
+-- 목/어깨 관련
+INSERT INTO article
+SET regDate = NOW(), updateDate = NOW(),
+title = "목디스크 증상의 초기 징후",
+`body` = "목디스크는 목의 추간판이 돌출되어 신경을 압박하는 질환으로, 팔 저림이나 어깨 통증이 동반될 수 있다.",
+usrId = 2, partId = 2, boardId = 2;
+
+-- 어깨 관련
+INSERT INTO article
+SET regDate = NOW(), updateDate = NOW(),
+title = "회전근개 파열이란?",
+`body` = "회전근개는 어깨 관절을 안정화시키는 근육들의 집합이며, 이 부위의 손상은 어깨의 운동 범위 감소 및 통증을 유발한다.",
+usrId = 1, partId = 3, boardId = 2;
+
+-- 팔꿈치 관련
+INSERT INTO article
+SET regDate = NOW(), updateDate = NOW(),
+title = "팔꿈치 부상의 예방 방법",
+`body` = "팔꿈치 관절은 반복된 움직임에 민감하므로 운동 전 스트레칭과 올바른 자세가 부상을 예방하는 핵심이다.",
+usrId = 1, partId = 4, boardId = 2;
+
+-- 허리 관련
+INSERT INTO article
+SET regDate = NOW(), updateDate = NOW(),
+title = "허리디스크 초기 증상 알아보기",
+`body` = "허리디스크는 추간판이 돌출되면서 신경을 누르는 질환으로, 다리 저림이나 허리통증이 주요 증상이다.",
+usrId = 2, partId = 5, boardId = 2;
+
+-- 복부 관련
+INSERT INTO article
+SET regDate = NOW(), updateDate = NOW(),
+title = "소화불량과 복부 팽만의 원인",
+`body` = "소화불량은 식사 후 복부 팽만, 트림, 속쓰림 등을 유발하며 식습관 개선과 위장 관리가 필요하다.",
+usrId = 1, partId = 6, boardId = 2;
+
+-- 골반 관련
+INSERT INTO article
+SET regDate = NOW(), updateDate = NOW(),
+title = "만성 골반통 증후군",
+`body` = "만성 골반통은 여성에게 흔하게 나타나는 증상으로, 생식기 질환 외에도 요추, 신경통 등이 원인이 될 수 있다.",
+usrId = 3, partId = 7, boardId = 2;
+
+
+
+###################
 INSERT INTO board
 SET
 `code` = 'NOTICE',
@@ -295,6 +349,12 @@ SET
 		usrId = 2,
 		articleId = 1;
 ################
+
+
+
+
+
+
 
 SELECT *
 FROM `user`;
@@ -362,3 +422,24 @@ SELECT *
 		JOIN `user` AS M
 		ON A.usrId = M.id
 		WHERE  A.title LIKE '%어깨%'
+		
+		
+		SELECT COUNT(*)
+		FROM `like` L
+		INNER JOIN `user` U
+		ON L.usrId =
+		U.id
+		WHERE
+		L.articleId = 1
+		AND
+		U.id = 1;
+		
+		SELECT COUNT(*)
+		FROM `like` L
+		INNER JOIN `user` U
+		ON L.usrId =
+		U.id
+		WHERE
+		L.articleId = 16
+		AND
+		U.id = 1;

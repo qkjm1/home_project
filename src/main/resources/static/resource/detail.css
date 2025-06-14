@@ -42,7 +42,7 @@
 }
 
 .top-con {
-	height:50px;
+	height: 50px;
 	z-index: 1;
 	margin: 0 auto;
 	padding: 1rem 5rem;
@@ -50,12 +50,31 @@
 	padding: 30px;
 }
 
-
-
 .btns {
 	width: 96%;
 	position: absolute;
 	display: flex;
 	flex-direction: row-reverse;
 	top: 126px;
+}
+
+/* 북마크 부분 */
+.bookmark__icon_col {
+	stroke: #EAD292;
+}
+
+.info-title {
+	height: 40px;
+	width: 60%;
+	background-color: white;
+	left: 0;
+}
+
+.info-title-box>div:nth-child(2) {
+	height: 35px;
+	font-size: 10px;
+}
+
+.info-title-box {
+	width: 100%;
 }

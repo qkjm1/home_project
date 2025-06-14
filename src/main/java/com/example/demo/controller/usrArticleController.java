@@ -190,6 +190,7 @@ public class usrArticleController {
 
 		int listInApage = 6;
 
+		//부위별로 검색어랑 같이 가져오기
 		int getArticleCountByPartId = articleService.getArticleCountByPartId(boardId, partId, searchKeywordTypeCode, searchKeyword);
 		System.err.println("getArticleCountByPartId: "+getArticleCountByPartId);
 		int totalPage = (int) Math.ceil(getArticleCountByPartId / (double) listInApage);
@@ -200,6 +201,11 @@ public class usrArticleController {
 		
 		Article getPartId = articleService.partName(partId);
 
+//		ResultData isBookmarkedRD = bookmarkService.isBookmarked(rq.getIsLoginMemberId(), articleId);
+//		System.out.println("++++===="+isBookmarkedRD.isSuccess());
+//		model.addAttribute("isBookmarked", isBookmarkedRD.isSuccess()); // 좋아요를 했는지 안했는지		
+		
+		
 		model.addAttribute("getArticleCountByPartId", getArticleCountByPartId);
 		model.addAttribute("totalPage", totalPage);
 		model.addAttribute("getPartId", getPartId);

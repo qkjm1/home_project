@@ -68,6 +68,11 @@ ul, li, a {
 
 /* 회원가입 폼
 */
+.join-item {
+	background-color: #3C3C29;
+	color: #E1D8CD;
+}
+
 /*   Q&A 게시글 판    */
 .contain {
 	width: 80%;
@@ -79,7 +84,7 @@ ul, li, a {
 .top-boundry-box {
 	width: 100%;
 	height: 200px;
-	background-color: #012C4E;
+	background-color: #3C3C29;
 }
 
 /*  검색박스 */
@@ -112,10 +117,9 @@ ul, li, a {
 
 .search-box input:focus {
 	outline: none;
-	border-color: #007BFF; /* 포커스 시 파란색 */
-	box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+	border-color: #3C3C29; /* 포커스 시 파란색 */
+	box-shadow: 0 0 0 3px rgba(60, 60, 41, 0.2);
 }
-
 /*  큐앤에이박스 */
 .qna-con {
 	background-color: white;
@@ -163,13 +167,13 @@ ul, li, a {
 
 .side-box {
 	width: 20%;
-	background-color: #e0e0e0;
+	background-color: #f3efeb;
 	border-radius: 4px; /* 둥글게 */
 }
 
 .info-box {
 	width: 80%;
-	background-color: #e0e0e0;
+	background-color: #f3efeb;
 	border-radius: 4px; /* 둥글게 */
 }
 
@@ -185,7 +189,7 @@ ul, li, a {
 }
 
 .side-box>ul>li {
-	border-top: 2px solid black;
+	border-top: 2px solid #3C3C29;
 	text-align: center;
 	position: absolute;
 	width: 100%;
@@ -202,8 +206,9 @@ ul, li, a {
 	padding-top: 28px;
 	font-weight: bold;
 	display: block;
-	background-color: #F5F5F5;
+	background-color: #E1D8CD;
 	height: 100%;
+	color: #3C3C29;
 }
 
 /*  인포박스   */
@@ -226,18 +231,17 @@ ul, li, a {
 	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.info-title>a {
-	width: 50%;
+.info-title a {
+	width: 100%;
 	white-space: pre;
 	overflow: hidden;
 }
 
 .info-body {
-	margin-top: 10px;
 	border-radius: 8px;
 	padding: 10px;
 	width: 100%;
-	background-color: #F5F5F5;
+	background-color: #f0eeec;
 	height: 79%;
 	white-space: normal;
 	overflow-x: hidden;
@@ -252,9 +256,9 @@ ul, li, a {
 }
 
 .getPartId {
-	font-size:12px;
+	font-size: 12px;
 	left: 5px;
-	top:100px;
+	top: 100px;
 	position: absolute;
 	border-radius: 4px;
 }
@@ -279,9 +283,6 @@ ul, li, a {
 	background-color: white;
 }
 
-/* 북마크 부분 */
 
 
-.bookmark__icon_col {
-	stroke: #EAD292;
-}
+

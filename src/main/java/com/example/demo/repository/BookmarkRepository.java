@@ -20,4 +20,6 @@ public interface BookmarkRepository {
 	
 	//즐찾한 유저인지 아닌지
 	public int isBookmarked(int usrId, int articleId);
+	//아이디로 아티클과 북마크 조인
+	public List<Article> isBookmarkedbyId(int usrId);
 }

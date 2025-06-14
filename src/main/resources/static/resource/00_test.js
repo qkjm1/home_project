@@ -6,14 +6,15 @@ const container = document.getElementById('webgl-container');
 
 // === Scene, Camera, Renderer ===
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x494949);
+scene.background = new THREE.Color(0xE1D8CD);
 
 
 const width = window.innerWidth;
 const height = 1000;
 
 const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-camera.position.set(0, 3, 8);
+camera.position.set(3, 1, 4);
+
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(width, height);
@@ -41,16 +42,19 @@ let model; // 모델을 클릭 이벤트에서 사용하기 위해 전역 변수
 
 loader.load('/models/Low_Part.glb', function(gltf) {
 	model = gltf.scene;
+	model.rotation.set(0, 0, 0);
+	model.scale.set(4,4,4);
+	model.position.set(0,-4,0);
+
 	scene.add(model);
-
-	model.scale.set(3, 3, 3);
-	model.position.set(2, -1.5, 4);
-
 	model.traverse((child) => {
 		if (child.isMesh) {
 			console.log('Mesh Loaded:', child.name);
 			child.userData.name = child.name;
 			child.visible = true;
+			
+			child.material = child.material.clone();
+			child.material.color.set('#f5f5f5'); // 원하는 색상 코드
 		}
 	});
 }, undefined, function(error) {
@@ -95,9 +99,9 @@ function InfoArticle__get(partId) {
 
 
 				const html = `
-				<div class="qna-con flex flex-col mx-auto">				
-						<div class="qna-box">
-						<div class="qna-title mx-auto flex items-end justify-center">
+				<div class="maininfo-con flex flex-col mx-auto">				
+					<div class="maininfo-box">
+						<div class="maininfo-title mx-auto flex items-end justify-center">
 							<div class="flex-grow">	
 								<a href="#" class="text-xl font-bold text-black">${article.title}</a>
 							</div>
@@ -106,8 +110,8 @@ function InfoArticle__get(partId) {
 							<div class="text-black">작성일:${dateStr}</div>
 						</div>
 						<div class="partLine w-100%"></div>		
-						<div class="qna-body text-black">
-						<a href="/usr/article/detail?articleId=${article.id}">${article.body}</a>
+						<div class="maininfo-body text-black">
+							<a href="/usr/article/detail?articleId=${article.id}">${article.body}</a>
 						</div>
 					</div>
 				</div>
@@ -148,7 +152,7 @@ window.addEventListener('click', (event) => {
 
 			if (selectedMesh === clickedPart) {
 				clickedPart.material = clickedPart.material.clone();
-				clickedPart.material.color.set('#ccc'); // 기본색
+				clickedPart.material.color.set('#f5f5f5'); // 기본색
 				selectedMesh = null;
 				$('.show').removeClass('active');
 				return;
@@ -160,7 +164,7 @@ window.addEventListener('click', (event) => {
 					// 모든 mesh 초기화 (필요 시 clone된 material도 덮어씀)
 					if (child.material.isMaterial) {
 						child.material = child.material.clone();
-						child.material.color.set('#ccc'); // 기본색
+						child.material.color.set('#f5f5f5'); // 기본색
 					}
 				}
 			});
