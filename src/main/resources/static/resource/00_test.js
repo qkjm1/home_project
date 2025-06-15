@@ -43,8 +43,8 @@ let model; // 모델을 클릭 이벤트에서 사용하기 위해 전역 변수
 loader.load('/models/Low_Part.glb', function(gltf) {
 	model = gltf.scene;
 	model.rotation.set(0, 0, 0);
-	model.scale.set(4,4,4);
-	model.position.set(0,-4,0);
+	model.scale.set(4, 4, 4);
+	model.position.set(0, -4, 0);
 
 	scene.add(model);
 	model.traverse((child) => {
@@ -52,7 +52,7 @@ loader.load('/models/Low_Part.glb', function(gltf) {
 			console.log('Mesh Loaded:', child.name);
 			child.userData.name = child.name;
 			child.visible = true;
-			
+
 			child.material = child.material.clone();
 			child.material.color.set('#f5f5f5'); // 원하는 색상 코드
 		}
@@ -75,54 +75,22 @@ const nameToIdMap = {
 	"Calf": 10
 };
 
-function InfoArticle__get(partId) {
 
-	console.log(partId);
-	$.get('/usr/article/infomainlist', {
-		partId: partId,
-		ajaxMode: 'Y'
-	}, function(data) {
-		const articles = data.articles;
-
-		const $listContainer = $('#article-list'+partId); // 결과를 뿌릴 요소 ID
-		$listContainer.empty(); // 기존 리스트 비우기
-
-
-		if (!articles || articles.length === 0) {
-			$listContainer.append('<div class="noAr flex" style="text-align:center;">게시글이 없습니다</div>');
-		} else {
-			articles.forEach(article => {
-				console.log(articles);
-
-
-				const dateStr = article.regDate.substring(0, 10);
-
-
-				const html = `
-				<div class="maininfo-con flex flex-col mx-auto">				
-					<div class="maininfo-box">
-						<div class="maininfo-title mx-auto flex items-end justify-center">
-							<div class="flex-grow">	
-								<a href="#" class="text-xl font-bold text-black">${article.title}</a>
-							</div>
-							<div class="flex-grow"></div>
-							<div class="text-black">작성자:${article.extra__writer}&nbsp&nbsp</div>
-							<div class="text-black">작성일:${dateStr}</div>
-						</div>
-						<div class="partLine w-100%"></div>		
-						<div class="maininfo-body text-black">
-							<a href="/usr/article/detail?articleId=${article.id}">${article.body}</a>
-						</div>
-					</div>
-				</div>
-	            `;
-				$listContainer.append(html);
-
-
-			});
-		}
-	}, 'json');
+const queryToName = {
+	"Head": "편두통 후두하근",
+	"Neck_Shoulder_B": "어깨통증 회전근개",
+	"Neck_Shoulder_F": "둥근어깨 쇄골통증",
+	"Arms": "테니스엘보 골프엘보 손목터널증후군",
+	"Chest_B": "척추측만증 강직성척추염 추간판탈출증",
+	"Chest_F": "코어운동",
+	"Pelvic": "궁둥구멍증후군",
+	"Legs_F": "대퇴근통증",
+	"Legs_B": "햄스트링통증",
+	"Calf": "발목통증 종아리신경병증 족저근막염"
 }
+
+let currentQuery = null;
+let currentPartId = null;
 
 
 
@@ -145,9 +113,10 @@ window.addEventListener('click', (event) => {
 		if (intersects.length > 0) {
 			const clickedPart = intersects[0].object;
 			const partName = clickedPart.name;
-			console.log('Clicked:', partName);
+
 			let $target = $('.show.' + partName);
 			const partId = nameToIdMap[partName];
+			const query = queryToName[partName];
 
 
 			if (selectedMesh === clickedPart) {
@@ -174,11 +143,15 @@ window.addEventListener('click', (event) => {
 				clickedPart.material = clickedPart.material.clone();
 				clickedPart.material.color.set('#EAD292'); // 강조색
 				selectedMesh = clickedPart;
-				console.log(partId);
 			}
 
 			if (partId !== undefined) {
+				currentQuery = query;
+				currentPartId = partId;
+
+				console.log(partId);
 				InfoArticle__get(partId);
+				youtubeList__get(query, partId);
 			} else {
 				console.warn('Unknown part name:', partName);
 			}
@@ -238,3 +211,118 @@ function animate() {
 	renderer.render(scene, camera);
 }
 animate();
+
+
+//==========================
+function InfoArticle__get(partId) {
+
+	console.log(partId);
+	$.get('/usr/article/infomainlist', {
+		partId: partId,
+		ajaxMode: 'Y'
+	}, function(data) {
+		const articles = data.articles;
+
+		const $listContainer = $('#article-list' + partId); // 결과를 뿌릴 요소 ID
+		$listContainer.empty(); // 기존 리스트 비우기
+
+
+		if (!articles || articles.length === 0) {
+			$listContainer.append('<div class="noAr flex" style="text-align:center;">게시글이 없습니다</div>');
+		} else {
+			articles.forEach(article => {
+				console.log(articles);
+
+
+				const dateStr = article.regDate.substring(0, 10);
+
+
+				const html = `
+				<div class="maininfo-con flex flex-col mx-auto">				
+					<div class="maininfo-box">
+						<div class="maininfo-title mx-auto flex items-end justify-center">
+							<div class="flex-grow">	
+								<a href="#" class="text-xl font-bold text-black">${article.title}</a>
+							</div>
+							<div class="flex-grow"></div>
+							<div class="text-black">작성자:${article.extra__writer}&nbsp&nbsp</div>
+						</div>
+						<div class="partLine w-100%"></div>		
+						<div class="maininfo-body text-black">
+							<a href="/usr/article/detail?articleId=${article.id}">${article.body}</a>
+						</div>
+					</div>
+				</div>
+	            `;
+				$listContainer.append(html);
+
+
+			});
+		}
+	}, 'json');
+}
+
+
+let nextPageToken = null;
+let isLoading = false;
+
+function youtubeList__get(query, partId, isNewSearch = false) {
+	if (isLoading) return;
+	isLoading = true;
+	
+	if (isNewSearch) {
+	  nextPageToken = null;  // 페이지 초기화
+	  $('#youtube-con' + partId).empty();  // 기존 리스트 비우기
+	}
+
+	$.get('/youtube/search', {
+		q: query,
+		pageToken: nextPageToken,
+		ajaxMode: 'Y'
+	}, function(data) {
+		const videos = data.videos;
+		nextPageToken = data.nextPageToken;
+
+		const $listContainer = $('#youtube-con' + partId); // 결과를 뿌릴 요소 ID
+		// 기존 리스트 비우기
+
+
+		if (!videos || videos.length === 0) {
+			$listContainer.append('<div class="noAr flex" style="text-align:center;">게시글이 없습니다</div>');
+		} else {
+			videos.forEach(video => {
+
+				const html = `
+				<div class="video-item">
+					<!-- 왼쪽: 썸네일 -->
+					<div class="thumbnail">
+						<a href="https://www.youtube.com/watch?v=${video.id.videoId}" target="_blank">
+							<img src="${video.snippet.thumbnails.medium.url}" alt="${video.snippet.title}" />
+						</a>
+					</div>
+
+					<!-- 오른쪽: 제목과 설명 -->
+					<div class="video-info">
+						<a href="https://www.youtube.com/watch?v=${video.id.videoId}" target="_blank">
+							<strong class="video-title">${video.snippet.title}</strong>
+						</a>
+						<p class="video-description">${video.snippet.description}</p>
+					</div>
+				</div>
+
+				`;
+				$listContainer.append(html);
+			});
+			isLoading = false;
+		}
+	}, 'json');
+}
+
+$('.show').on('scroll', function() {
+  const $this = $(this);
+  const nearBottom = $this.scrollTop() + $this.innerHeight() + 100 >= $this[0].scrollHeight;
+
+  if (nearBottom && !isLoading && nextPageToken && currentQuery && currentPartId) {
+    youtubeList__get(currentQuery, currentPartId);
+  }
+});

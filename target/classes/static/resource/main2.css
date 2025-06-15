@@ -23,13 +23,13 @@
 }
 
 .main_1-box2 {
-	margin-top:10px;
 	height: 100%;
 	position: absolute;
-	right: 82%;
+	right: 86%;
 }
 
 .main_1-box2>.show {
+	top:200px;
 	height: 60%;
 	width: 500px;
 }
@@ -95,4 +95,55 @@
 .partLine {
 	border: 1px solid black;
 	margin: 5px;
+}
+
+/*유튜브===========*/
+
+.video-item {
+	display: flex;
+	gap: 16px;
+	background-color:  white; /* 투명 배경 */
+	border-radius: 10px;
+	padding: 12px;
+	margin-bottom: 20px;
+	height: 150px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	overflow: hidden;
+}
+
+.video-item .thumbnail img {
+	height: 100%;
+	width: auto;
+	border-radius: 6px;
+	object-fit: cover;
+}
+
+.video-info {
+	flex-grow: 1;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.video-title {
+	font-size: 16px;
+	color: #333;
+	margin-bottom: 6px;
+	display: block;
+	text-decoration: none;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.video-description {
+	color: #555;
+	font-size: 14px;
+	line-height: 1.4;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 3; /* 최대 3줄 표시 */
+	-webkit-box-orient: vertical;
 }

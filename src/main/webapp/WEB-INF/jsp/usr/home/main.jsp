@@ -28,13 +28,13 @@
 			<div class="show Chest_F">
 				<div id="article-list6" class="flex flex-col"></div>
 			</div>
-			<div class="show Legs_B">
+			<div class="show Pelvic">
 				<div id="article-list7" class="flex flex-col"></div>
 			</div>
-			<div class="show Legs_F">
+			<div class="show Legs_B">
 				<div id="article-list8" class="flex flex-col"></div>
 			</div>
-			<div class="show Pelvic">
+			<div class="show Legs_F">
 				<div id="article-list9" class="flex flex-col"></div>
 			</div>
 			<div class="show Calf">
@@ -45,35 +45,66 @@
 		<div id="webgl-container"></div>
 
 		<div class="main_1-box2 flex">
+
 			<div class="show Head">
-				<div id="article-list1" class="flex flex-col"></div>
+				<h1 class="text-5xl">YOUTUBE</h1>
+				<div id="article-list1" class="flex flex-col">
+					<div id="youtube-con1" class="flex flex-col"></div>
+				</div>
 			</div>
 			<div class="show Neck_Shoulder_B">
-				<div id="article-list2" class="flex flex-col"></div>
+				<h1 class="text-5xl">YOUTUBE</h1>
+				<div id="article-list2" class="flex flex-col">
+					<div id="youtube-con2" class="flex flex-col"></div>
+				</div>
 			</div>
 			<div class="show Neck_Shoulder_F">
-				<div id="article-list3" class="flex flex-col"></div>
+				<h1 class="text-5xl">YOUTUBE</h1>
+				<div id="article-list3" class="flex flex-col">
+					<div id="youtube-con3" class="flex flex-col"></div>
+				</div>
 			</div>
 			<div class="show Arms">
-				<div id="article-list4" class="flex flex-col"></div>
+				<h1 class="text-5xl">YOUTUBE</h1>
+				<div id="article-list4" class="flex flex-col">
+					<div id="youtube-con4" class="flex flex-col"></div>
+				</div>
 			</div>
 			<div class="show Chest_B">
-				<div id="article-list5" class="flex flex-col"></div>
+				<h1 class="text-5xl">YOUTUBE</h1>
+				<div id="article-list5" class="flex flex-col">
+					<div id="youtube-con5" class="flex flex-col"></div>
+				</div>
 			</div>
 			<div class="show Chest_F">
-				<div id="article-list6" class="flex flex-col"></div>
+				<h1 class="text-5xl">YOUTUBE</h1>
+				<div id="article-list6" class="flex flex-col">
+					<div id="youtube-con6" class="flex flex-col"></div>
+				</div>
 			</div>
 			<div class="show Legs_B">
-				<div id="article-list7" class="flex flex-col"></div>
+				<h1 class="text-5xl">YOUTUBE</h1>
+				<div id="article-list7" class="flex flex-col">
+					<div id="youtube-con7" class="flex flex-col"></div>
+				</div>
 			</div>
 			<div class="show Legs_F">
-				<div id="article-list8" class="flex flex-col"></div>
+				<h1 class="text-5xl">YOUTUBE</h1>
+				<div id="article-list8" class="flex flex-col">
+					<div id="youtube-con8" class="flex flex-col"></div>
+				</div>
 			</div>
 			<div class="show Pelvic">
-				<div id="article-list9" class="flex flex-col"></div>
+				<h1 class="text-5xl">YOUTUBE</h1>
+				<div id="article-list9" class="flex flex-col">
+					<div id="youtube-con9" class="flex flex-col"></div>
+				</div>
 			</div>
 			<div class="show Calf">
-				<div id="article-list10" class="flex flex-col"></div>
+				<h1 class="text-5xl">YOUTUBE</h1>
+				<div id="article-list10" class="flex flex-col">
+					<div id="youtube-con10" class="flex flex-col"></div>
+				</div>
 			</div>
 		</div>
 

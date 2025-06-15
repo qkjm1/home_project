@@ -176,6 +176,22 @@ html, body {
 	background-color: rgba(0, 0, 0, 0.3); /* 마우스 오버 시 반투명 검정 */
 }
 
+/* 기본: 모두 선명 */
+.info-box-items > div {
+	transition: filter 0.3s ease;
+}
+
+/* 전체에 마우스 올라갔을 때, 모두 흐리게 */
+.info-box-items:hover > div {
+	filter: blur(1.5px);
+}
+
+/* 단, hover된 요소는 다시 선명하게 */
+.info-box-items > div:hover {
+	filter: none;
+	z-index: 1;
+}
+
 /*3박스*/
 .main_3-box {
 	background-color: #E1D8CD;

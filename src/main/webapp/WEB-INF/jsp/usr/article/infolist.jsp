@@ -32,7 +32,7 @@
 	</div>
 	<div class="info-con flex mx-auto justify-around">
 		<div class="side-box flex flex-col">
-			<div class="h-40"></div>
+			<div class="h-10"></div>
 			<ul>
 				<li>
 					<a href="/usr/article/infolist?boardId=2&partId=1" class="partID">머리</a>
@@ -40,27 +40,47 @@
 			</ul>
 			<ul>
 				<li>
-					<a href="/usr/article/infolist?boardId=2&partId=2" class="partID">목/어깨</a>
+					<a href="/usr/article/infolist?boardId=2&partId=2" class="partID">목/어깨뒤쪽</a>
 				</li>
 			</ul>
 			<ul>
 				<li>
-					<a href="/usr/article/infolist?boardId=2&partId=3" class="partID">팔</a>
+					<a href="/usr/article/infolist?boardId=2&partId=3" class="partID">쇄골/어깨앞쪽</a>
 				</li>
 			</ul>
 			<ul>
 				<li>
-					<a href="/usr/article/infolist?boardId=2&partId=4" class="partID">등/허리</a>
+					<a href="/usr/article/infolist?boardId=2&partId=4" class="partID">팔</a>
 				</li>
 			</ul>
 			<ul>
 				<li>
-					<a href="/usr/article/infolist?boardId=2&partId=5" class="partID">골반/다리</a>
+					<a href="/usr/article/infolist?boardId=2&partId=5" class="partID">몸통(등허리)</a>
 				</li>
 			</ul>
 			<ul>
 				<li>
-					<a href="/usr/article/infolist?boardId=2&partId=6" class="partID">종아리/발목</a>
+					<a href="/usr/article/infolist?boardId=2&partId=6" class="partID">몸통(가슴배)</a>
+				</li>
+			</ul>
+			<ul>
+				<li>
+					<a href="/usr/article/infolist?boardId=2&partId=7" class="partID">골반</a>
+				</li>
+			</ul>
+			<ul>
+				<li>
+					<a href="/usr/article/infolist?boardId=2&partId=8" class="partID">다리앞쪽</a>
+				</li>
+			</ul>
+			<ul>
+				<li>
+					<a href="/usr/article/infolist?boardId=2&partId=9" class="partID">다리뒤쪽</a>
+				</li>
+			</ul>
+			<ul>
+				<li>
+					<a href="/usr/article/infolist?boardId=2&partId=10" class="partID">종아리/발목</a>
 				</li>
 			</ul>
 			<div class="flex-grow"></div>

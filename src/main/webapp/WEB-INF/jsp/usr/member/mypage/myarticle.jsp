@@ -73,7 +73,7 @@
 										<button type="submit">
 											<div>
 												<svg id="bookmark__icon" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="none" stroke="#555"
-													stroke-width="3" viewBox="0 0 24 24" class="<c:if test='${isBookmarked == article.id}'>bookmark__icon_col</c:if>">
+													stroke-width="3" viewBox="0 0 24 24" class="${isBookmarked== article.id ? 'bookmark__icon_col' : ''}">
   <path d="M7 3a2 2 0 0 0-2 2v16l7-3 7 3V5a2 2 0 0 0-2-2H7z" />
 </svg>
 
