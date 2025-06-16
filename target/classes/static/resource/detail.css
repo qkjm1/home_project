@@ -50,6 +50,7 @@
 	padding: 30px;
 }
 
+
 .btns {
 	width: 96%;
 	position: absolute;
@@ -64,43 +65,51 @@
 }
 
 .info-title {
-	height: 40px;
-	width: 60%;
-	background-color: white;
-	left: 0;
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
-
 .info-title-box>div:nth-child(2) {
 	height: 35px;
-	font-size: 10px;
+	font-size: 13px;
 }
 
 .info-title-box {
-  gap: 1rem;
-  flex-wrap: wrap;
+  display: flex;
+  gap: 0.5rem;
 }
 
-.bookmark-btn {
-  background: transparent;
-  border: none;
-  padding: 5px;
-  cursor: pointer;
-  transition: transform 0.2s ease;
+.info-body {
+height: 200px;
+  height: 150px;
+  padding-top: 0.5rem;
 }
 
-.bookmark-btn:hover {
-  transform: scale(1.1);
+.info-box-in > div {
+	width: 80%;
+	padding: 20px;
+
 }
 
-.bookmark__icon {
-  stroke: #ccc;
-  transition: stroke 0.3s ease;
+.info-box {
+	padding: 20px;
 }
 
-.bookmark__icon_col {
-  stroke: #EAD292;
-  fill: #EAD292;
+.p-1:hover {
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
+
+
+.p-1 {
+	height: 340px;
+	justify-content: center;
+	align-content: center;
+	background-color: white;
+	border-radius: 4px; /* 둥글게 */
+	padding: 10px;
+}
+
 
 .toast-msg {
   position: fixed;
@@ -115,3 +124,12 @@
   z-index: 9999;
   opacity: 0.9;
 }
+
+.info-title-box{
+	justify-content: space-around;
+}
+
+.info-body {
+	border-top: 1px solid #012C4E;
+}
+
