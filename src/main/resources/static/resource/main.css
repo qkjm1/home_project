@@ -94,9 +94,6 @@ html, body {
 
 /*메인 인포*/
 
-.show.active {
-	display: block;
-}
 
 /*2번박스*/
 .info-box-items {

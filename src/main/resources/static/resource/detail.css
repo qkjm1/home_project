@@ -76,5 +76,42 @@
 }
 
 .info-title-box {
-	width: 100%;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.bookmark-btn {
+  background: transparent;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.bookmark-btn:hover {
+  transform: scale(1.1);
+}
+
+.bookmark__icon {
+  stroke: #ccc;
+  transition: stroke 0.3s ease;
+}
+
+.bookmark__icon_col {
+  stroke: #EAD292;
+  fill: #EAD292;
+}
+
+.toast-msg {
+  position: fixed;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+  z-index: 9999;
+  opacity: 0.9;
 }

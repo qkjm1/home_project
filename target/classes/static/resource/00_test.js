@@ -16,7 +16,7 @@ const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
 camera.position.set(3, 1, 4);
 
 
-const renderer = new THREE.WebGLRenderer({ antialias: true });
+const renderer = new THREE.WebGLRenderer({ antialias: false });
 renderer.setSize(width, height);
 container.appendChild(renderer.domElement);
 
@@ -43,8 +43,8 @@ let model; // 모델을 클릭 이벤트에서 사용하기 위해 전역 변수
 loader.load('/models/Low_Part.glb', function(gltf) {
 	model = gltf.scene;
 	model.rotation.set(0, 0, 0);
-	model.scale.set(4, 4, 4);
-	model.position.set(0, -4, 0);
+	model.scale.set(2, 2, 2); // ===========================크기바꾸기 크기 바뀌;ㅣ
+	model.position.set(0, -2, 0);
 
 	scene.add(model);
 	model.traverse((child) => {
@@ -54,7 +54,7 @@ loader.load('/models/Low_Part.glb', function(gltf) {
 			child.visible = true;
 
 			child.material = child.material.clone();
-			child.material.color.set('#f5f5f5'); // 원하는 색상 코드
+			child.material.color.set('#f5f5f5');
 		}
 	});
 }, undefined, function(error) {
@@ -75,7 +75,7 @@ const nameToIdMap = {
 	"Calf": 10
 };
 
-
+// 유튜브
 const queryToName = {
 	"Head": "편두통 후두하근",
 	"Neck_Shoulder_B": "어깨통증 회전근개",
@@ -89,9 +89,19 @@ const queryToName = {
 	"Calf": "발목통증 종아리신경병증 족저근막염"
 }
 
-let currentQuery = null;
-let currentPartId = null;
-
+// queryToName은 query 문자열 모음 // 문자를 저장해놓은걸 다시 숫자로 호출할 수 있게끔 바꿔놓기
+const queryMap = {
+	1: queryToName["Head"],
+	2: queryToName["Neck_Shoulder_B"],
+	3: queryToName["Neck_Shoulder_F"],
+	4: queryToName["Arms"],
+	5: queryToName["Chest_B"],
+	6: queryToName["Chest_F"],
+	7: queryToName["Pelvic"],
+	8: queryToName["Legs_F"],
+	9: queryToName["Legs_B"],
+	10: queryToName["Calf"]
+};
 
 
 // === Raycaster ===
@@ -114,11 +124,12 @@ window.addEventListener('click', (event) => {
 			const clickedPart = intersects[0].object;
 			const partName = clickedPart.name;
 
-			let $target = $('.show.' + partName);
 			const partId = nameToIdMap[partName];
 			const query = queryToName[partName];
 
+			let $target = $('.partNo' + partId);
 
+			console.log("$target: " + $target);
 			if (selectedMesh === clickedPart) {
 				clickedPart.material = clickedPart.material.clone();
 				clickedPart.material.color.set('#f5f5f5'); // 기본색
@@ -151,7 +162,8 @@ window.addEventListener('click', (event) => {
 
 				console.log(partId);
 				InfoArticle__get(partId);
-				youtubeList__get(query, partId);
+
+				//				youtubeList__get(query, partId);
 			} else {
 				console.warn('Unknown part name:', partName);
 			}
@@ -187,14 +199,18 @@ renderer.domElement.addEventListener('mousemove', (event) => {
 	const deltaY = event.clientY - previousMousePosition.y;
 
 	// 수평 회전 (Y축)
-	model.rotation.y += deltaX * 0.01;
+	model.rotation.y += deltaX * 0.008;  //이거이거이억잉겅기억회전값 회전값
 
 	// 수직 회전 (X축 기준으로 회전)
-	model.rotation.x += deltaY * 0.01;
+	model.rotation.x += deltaY * 0.008;
 
 	previousMousePosition.x = event.clientX;
 	previousMousePosition.y = event.clientY;
 });
+
+
+
+
 
 
 // === 반응형 ===
@@ -211,6 +227,8 @@ function animate() {
 	renderer.render(scene, camera);
 }
 animate();
+
+
 
 
 //==========================
@@ -234,7 +252,7 @@ function InfoArticle__get(partId) {
 				console.log(articles);
 
 
-				const dateStr = article.regDate.substring(0, 10);
+				//				const dateStr = article.regDate.substring(0, 10); 날짜 포멧 안쓰여서 일단 둠
 
 
 				const html = `
@@ -246,7 +264,7 @@ function InfoArticle__get(partId) {
 							</div>
 							<div class="flex-grow"></div>
 							<div class="text-black">작성자:${article.extra__writer}&nbsp&nbsp</div>
-						</div>
+					 	</div>
 						<div class="partLine w-100%"></div>		
 						<div class="maininfo-body text-black">
 							<a href="/usr/article/detail?articleId=${article.id}">${article.body}</a>
@@ -263,16 +281,91 @@ function InfoArticle__get(partId) {
 }
 
 
+youtubeList__getMultiple(queryMap);
+
+
 let nextPageToken = null;
 let isLoading = false;
+let currentQuery = null;
+let currentPartId = null;
 
-function youtubeList__get(query, partId, isNewSearch = false) {
+async function youtubeList__getMultiple(queryMap) {
+	console.log("유튜브 api응답함");
+	// queryMap: { partId: query, ... }
 	if (isLoading) return;
 	isLoading = true;
 	
+	const entries = Object.entries(queryMap);
+
+	const requests = entries.map(async ([partId, query]) => {
+		try {
+			const res = await fetch(`/youtube/search?q=${encodeURIComponent(query)}&ajaxMode=Y`);
+			const data = await res.json();
+			return ({ partId, data });
+		} catch (err) {
+			console.error(`Error fetching for partId=${partId}`, err);
+			return { partId, data: null };
+		}
+	});
+
+	const results = await Promise.all(requests);
+
+	results.forEach(({ partId, data }) => {
+		const $container = $('#youtube-con' + partId);
+		$container.empty(); // 기존 비우기
+
+		if (!data || !data.videos || data.videos.length === 0) {
+			$container.append('<div class="noAr flex" style="text-align:center;">게시글이 없습니다</div>');
+			return;
+		}
+
+		data.videos.forEach(video => {
+			const html = `
+					<div class="video-item">
+						<div class="thumbnail">
+							<a href="https://www.youtube.com/watch?v=${video.id.videoId}" target="_blank">
+								<img src="${video.snippet.thumbnails.medium.url}" alt="${video.snippet.title}" />
+							</a>
+						</div>
+						<div class="video-info">
+							<a href="https://www.youtube.com/watch?v=${video.id.videoId}" target="_blank">
+								<strong class="video-title">${video.snippet.title}</strong>
+							</a>
+							<p class="video-description">${video.snippet.description}</p>
+						</div>
+					</div>`;
+			$container.append(html);
+		});
+	});
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+function youtubeList__get(query, partId, isNewSearch = false) {
+	if (isLoading) return;
+	isLoading = true;
+
 	if (isNewSearch) {
-	  nextPageToken = null;  // 페이지 초기화
-	  $('#youtube-con' + partId).empty();  // 기존 리스트 비우기
+		nextPageToken = null;  // 페이지 초기화
+		$('#youtube-con' + partId).empty();  // 기존 리스트 비우기
 	}
 
 	$.get('/youtube/search', {
@@ -317,12 +410,12 @@ function youtubeList__get(query, partId, isNewSearch = false) {
 		}
 	}, 'json');
 }
-
+*/
 $('.show').on('scroll', function() {
-  const $this = $(this);
-  const nearBottom = $this.scrollTop() + $this.innerHeight() + 100 >= $this[0].scrollHeight;
+	const $this = $(this);
+	const nearBottom = $this.scrollTop() + $this.innerHeight() + 100 >= $this[0].scrollHeight;
 
-  if (nearBottom && !isLoading && nextPageToken && currentQuery && currentPartId) {
-    youtubeList__get(currentQuery, currentPartId);
-  }
+	if (nearBottom && !isLoading && nextPageToken && currentQuery && currentPartId) {
+		youtubeList__get(currentQuery, currentPartId);
+	}
 });

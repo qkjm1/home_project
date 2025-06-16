@@ -2,13 +2,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <c:set var="pageTitle" value="${board.code} LIST"></c:set>
-<script type="module" src="/resource/ajax.js"></script>
 <%@ include file="../common/head.jspf"%>
 
-
-<link rel="stylesheet" href="/resource/common.css" />
-<link rel="stylesheet" href="/resource/detail.css" />
 <script type="module" src="/resource/ajax.js"></script>
+<link rel="stylesheet" href="/resource/detail.css" />
+<link rel="stylesheet" href="/resource/common.css" />
 <div class="top-boundry-box"></div>
 <div class="contain flex flex-col mx-auto">
 
@@ -32,7 +30,7 @@
 	</div>
 	<div class="info-con flex mx-auto justify-around">
 		<div class="side-box flex flex-col">
-			<div class="h-10"></div>
+			<div class="h-40"></div>
 			<ul>
 				<li>
 					<a href="/usr/article/infolist?boardId=2&partId=1" class="partID">머리</a>
@@ -40,47 +38,27 @@
 			</ul>
 			<ul>
 				<li>
-					<a href="/usr/article/infolist?boardId=2&partId=2" class="partID">목/어깨뒤쪽</a>
+					<a href="/usr/article/infolist?boardId=2&partId=2" class="partID">목/어깨</a>
 				</li>
 			</ul>
 			<ul>
 				<li>
-					<a href="/usr/article/infolist?boardId=2&partId=3" class="partID">쇄골/어깨앞쪽</a>
+					<a href="/usr/article/infolist?boardId=2&partId=3" class="partID">팔</a>
 				</li>
 			</ul>
 			<ul>
 				<li>
-					<a href="/usr/article/infolist?boardId=2&partId=4" class="partID">팔</a>
+					<a href="/usr/article/infolist?boardId=2&partId=4" class="partID">등/허리</a>
 				</li>
 			</ul>
 			<ul>
 				<li>
-					<a href="/usr/article/infolist?boardId=2&partId=5" class="partID">몸통(등허리)</a>
+					<a href="/usr/article/infolist?boardId=2&partId=5" class="partID">골반/다리</a>
 				</li>
 			</ul>
 			<ul>
 				<li>
-					<a href="/usr/article/infolist?boardId=2&partId=6" class="partID">몸통(가슴배)</a>
-				</li>
-			</ul>
-			<ul>
-				<li>
-					<a href="/usr/article/infolist?boardId=2&partId=7" class="partID">골반</a>
-				</li>
-			</ul>
-			<ul>
-				<li>
-					<a href="/usr/article/infolist?boardId=2&partId=8" class="partID">다리앞쪽</a>
-				</li>
-			</ul>
-			<ul>
-				<li>
-					<a href="/usr/article/infolist?boardId=2&partId=9" class="partID">다리뒤쪽</a>
-				</li>
-			</ul>
-			<ul>
-				<li>
-					<a href="/usr/article/infolist?boardId=2&partId=10" class="partID">종아리/발목</a>
+					<a href="/usr/article/infolist?boardId=2&partId=6" class="partID">종아리/발목</a>
 				</li>
 			</ul>
 			<div class="flex-grow"></div>
@@ -103,18 +81,17 @@
 								</div>
 								<div class="text-black">작성자:${article.extra__writer}&nbsp&nbsp</div>
 								<div>
-									<form action="../bookmark/doLike" method="POST" id="bookmark__btn">
+									<form action="/usr/bookmark/doLike" method="POST" class="bookmark__form" data-article-id="${article.id}">
 										<input type="hidden" name="articleId" value="${article.id}" />
-										<button type="submit">
-											<div>
-												<svg id="bookmark__icon" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="none" stroke="#555"
-													stroke-width="3" viewBox="0 0 24 24" class="${isBookmarked ? 'bookmark__icon_col' : ''}">
-  <path d="M7 3a2 2 0 0 0-2 2v16l7-3 7 3V5a2 2 0 0 0-2-2H7z" />
-</svg>
-
-											</div>
+										<button type="submit" class="bookmark-btn" title="북마크 추가/해제">
+											<svg class="bookmark__icon ${isBookmarked == article.id ? 'bookmark__icon_col' : ''}"
+												xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="none" stroke="#555" stroke-width="3"
+												viewBox="0 0 24 24">
+      <path d="M7 3a2 2 0 0 0-2 2v16l7-3 7 3V5a2 2 0 0 0-2-2H7z" />
+    </svg>
 										</button>
 									</form>
+
 								</div>
 							</div>
 							<div class="info-body">

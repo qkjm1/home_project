@@ -15,6 +15,13 @@
 	color: white;
 }
 
+
+
+.active {
+	display: block;
+}
+
+
 .main_1-box1 {
 	margin-top:20px;
 	height: 100%;
