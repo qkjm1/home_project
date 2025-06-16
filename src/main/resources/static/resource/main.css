@@ -1,6 +1,6 @@
 html, body {
 	height: 3500px;
-	background-color: #F5F5F5;
+	background-color: #E1D8CD;
 }
 
 .contain {
@@ -10,7 +10,7 @@ html, body {
 .main_1-box {
 	width: 100%;
 	height: 1000px;
-	background-color: #EAD292;
+	background-color: #E1D8CD;
 	position: relative;
 }
 
@@ -25,13 +25,16 @@ html, body {
 	height: 1000px;
 	background-color: #3C3C29;
 	position: relative;
+	display: flex;
+	justify-content: center; /* 수평 정렬 */
+	align-items:flex-start;;
 }
 
 .main_line_1-2 {
 	top: 950px;
 	width: 100%;
 	height: 100px;
-	background-color: #3C3C29;
+	background-color: #E1D8CD;
 	border-radius: 9999px; /* 둥글게 */
 	position: absolute;
 	z-index: 10;
@@ -51,9 +54,9 @@ html, body {
 	width: 100%;
 	height: 800px;
 	position: absolute;
-	background-color: #3C3C29;
-	top: 100px;
+	top: 500px;
 	position: absolute;
+	z-index: 5;
 }
 
 /*  위에는 자리 정리  */
@@ -93,11 +96,14 @@ html, body {
 }
 
 /*메인 인포*/
-
+/*검색어*/
+.main_2-box>form {
+	position: absolute;
+}
 
 /*2번박스*/
 .info-box-items {
-	margin-top: 40px;
+	top: 40px;
 	width: 100%;
 }
 
@@ -113,84 +119,70 @@ html, body {
 	overflow: hidden; /* ::after가 바깥으로 넘치지 않게 */
 }
 
-.info-box-items>div::after {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-size: 15px;
-	font: bold;
-	content: '';
-	color: white;
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(0, 0, 0, 0); /* 기본은 투명 */
-	pointer-events: none; /* 마우스 이벤트 방해하지 않도록 */
+/* hover 시 오버레이 사라짐 */
+.sprite:hover::after {
+  opacity: 0;
 }
 
-.info-box-items>div:first-child:hover::after {
+/* 해당 요소만 선명하게 */
+.sprite:hover {
+  filter: none;
+  z-index: 1;
+}
+
+
+.info-box-items>div:nth-child(1):hover {
 	content: '머리';
 }
 
-.info-box-items>div:nth-child(2):hover::after {
+.info-box-items>div:nth-child(2):hover {
 	content: '목/어깨';
 }
 
-.info-box-items>div:nth-child(3):hover::after {
+.info-box-items>div:nth-child(3):hover {
+	filter: none;
 	content: '쇄골/어깨앞쪽';
 }
 
-.info-box-items>div:nth-child(4):hover::after {
+.info-box-items>div:nth-child(4):hover {
+	filter: none;
 	content: '팔';
 }
 
-.info-box-items>div:nth-child(5):hover::after {
+.info-box-items>div:nth-child(5):hover {
+	filter: none;
 	content: '몸톰(등허리)';
 }
 
-.info-box-items>div:nth-child(6):hover::after {
+.info-box-items>div:nth-child(6):hover {
+	filter: none;
 	content: '몸톰(가슴배)';
 }
 
-.info-box-items>div:nth-child(7):hover::after {
+.info-box-items>div:nth-child(7):hover {
+	filter: none;
 	content: '골반';
 }
 
-.info-box-items>div:nth-child(8):hover::after {
+.info-box-items>div:nth-child(8):hover {
+	filter: none;
 	content: '다리 앞쪽';
 }
 
-.info-box-items>div:nth-child(9):hover::after {
+.info-box-items>div:nth-child(9):hover {
+	filter: none;
 	content: '다리 뒤쪽';
 }
 
-.info-box-items>div:nth-child(10):hover::after {
+.info-box-items>div:nth-child(10):hover {
+	
 	content: '종아리/발목';
 }
-.info-box-items>div:hover::after {
-	background-color: rgba(0, 0, 0, 0.3); /* 마우스 오버 시 반투명 검정 */
-}
 
-/* 기본: 모두 선명 */
-.info-box-items > div {
-	transition: filter 0.3s ease;
-}
-
-/* 전체에 마우스 올라갔을 때, 모두 흐리게 */
-.info-box-items:hover > div {
-	filter: blur(1.5px);
-}
-
-/* 단, hover된 요소는 다시 선명하게 */
-.info-box-items > div:hover {
-	filter: none;
-	z-index: 1;
-}
 
 /*3박스*/
 .main_3-box {
 	background-color: #E1D8CD;
 	height: 1300px;
+	position: relative;
 }

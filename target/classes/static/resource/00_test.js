@@ -43,8 +43,8 @@ let model; // 모델을 클릭 이벤트에서 사용하기 위해 전역 변수
 loader.load('/models/Low_Part.glb', function(gltf) {
 	model = gltf.scene;
 	model.rotation.set(0, 0, 0);
-	model.scale.set(2, 2, 2); // ===========================크기바꾸기 크기 바뀌;ㅣ
-	model.position.set(0, -2, 0);
+	model.scale.set(3, 3, 3); // ===========================크기바꾸기 크기 바뀌;ㅣ
+	model.position.set(0, -3, 0);
 
 	scene.add(model);
 	model.traverse((child) => {
