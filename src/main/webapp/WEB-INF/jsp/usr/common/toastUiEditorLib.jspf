@@ -357,6 +357,12 @@ function getUriParams(uri) {
 	        codepenPlugin,
 	        replPlugin
 	      ],
+	      hooks: {
+	            addImageBlobHook(blob, callback) {  // 이미지 업로드 로직 커스텀
+	                console.log(blob);
+	                console.log(callback);
+	            }
+	        },
 	      customHTMLSanitizer: (html) => {
 	        return (
 	          DOMPurify.sanitize(html, {

@@ -8,6 +8,7 @@
 	font-family: 'Noto Sans KR', sans-serif;
 	color: #212529;
 	line-height: 1.7;
+	padding: 3rem 1rem;
 }
 
 /* 제목 */
@@ -51,7 +52,6 @@
 	padding: 30px;
 }
 
-
 .btns {
 	width: 96%;
 	position: absolute;
@@ -66,31 +66,34 @@
 }
 
 .info-title {
-  flex: 1;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+	flex: 1;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
+
 .info-title-box>div:nth-child(2) {
 	height: 35px;
 	font-size: 13px;
 }
 
 .info-title-box {
-  display: flex;
-  gap: 0.5rem;
+	display: flex;
+	gap: 0.5rem;
 }
 
 .info-body {
-height: 200px;
-  height: 150px;
-  padding-top: 0.5rem;
+	height: 200px;
+	height: 150px;
+	padding-top: 0.5rem;
+	word-wrap: break-word;
 }
 
-.info-box-in > div {
+
+
+.info-box-in>div {
 	width: 80%;
 	padding: 20px;
-
 }
 
 .info-box {
@@ -101,7 +104,6 @@ height: 200px;
 	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
 
-
 .p-1 {
 	height: 340px;
 	justify-content: center;
@@ -111,26 +113,24 @@ height: 200px;
 	padding: 10px;
 }
 
-
 .toast-msg {
-  position: fixed;
-  bottom: 50px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #333;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 20px;
-  font-size: 14px;
-  z-index: 9999;
-  opacity: 0.9;
+	position: fixed;
+	bottom: 50px;
+	left: 50%;
+	transform: translateX(-50%);
+	background-color: #333;
+	color: white;
+	padding: 10px 20px;
+	border-radius: 20px;
+	font-size: 14px;
+	z-index: 9999;
+	opacity: 0.9;
 }
 
-.info-title-box{
+.info-title-box {
 	justify-content: space-around;
 }
 
 .info-body {
 	border-top: 1px solid #012C4E;
 }
-

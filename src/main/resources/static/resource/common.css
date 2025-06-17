@@ -283,8 +283,8 @@ ul, li, a {
 .bookmark-btn {
 	background: transparent;
 	border: none;
-	padding: 6px;
-	margin-left: 5px;
+	top: 40px;
+	margin-left: 50px;
 	cursor: pointer;
 	transition: transform 0.2s ease;
 	position: relative; /* 툴팁 위치 기준 */

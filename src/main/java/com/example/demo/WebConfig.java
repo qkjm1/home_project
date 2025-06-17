@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.demo;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -32,9 +32,8 @@ public class WebConfig implements WebMvcConfigurer {
         .setCacheControl(CacheControl.maxAge(365, TimeUnit.DAYS));
     
     	
-    	 registry
-         .addResourceHandler("/uploaded/**")
-         .addResourceLocations("file:/your/local/path/to/uploaded/");
+    	registry.addResourceHandler("/profile/**")
+        .addResourceLocations("file:///C:/upload/profile/");
     }
 }
 

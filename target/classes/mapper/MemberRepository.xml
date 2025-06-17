@@ -66,10 +66,50 @@
 		#{email};
 	</insert>
 
-	<select id="updateProfileImage">
+
+
+	<insert id="updateProfileImage">
 		INSERT INTO cartoon
 		SET
-		`img`= #{string};
+		`img`= #{string},
+		usrId =
+		#{usrId};
+	</insert>
+
+
+	<select id="findById" resultType="com.example.demo.vo.Member">
+		SELECT C.img AS ProfileImage
+		FROM cartoon C
+		INNER JOIN `user` U
+		ON C.usrId = U.id
+		WHERE C.usrId =
+		#{usrId};
 	</select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </mapper>
