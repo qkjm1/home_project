@@ -7,7 +7,7 @@
 <title>LOGIN</title>
 <link rel="stylesheet" href="/resource/common.css" />
 <div class="top-boundry-box"></div>
-<div class="contents-box">
+<div class="contents-box ">
 	<div class="signup-box flex flex-col">
 			<div class="mx-auto">LOGO</div>
 		<form action="/usr/member/doLogin" method="POST" onsubmit="return validateIdPasswords();">

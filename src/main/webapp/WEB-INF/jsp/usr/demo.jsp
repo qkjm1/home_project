@@ -1,34 +1,555 @@
-<%@ page import="java.net.URLEncoder" %>
-<%@ page import="java.security.SecureRandom" %>
-<%@ page import="java.math.BigInteger" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<title>네이버 로그인</title>
+<meta charset="UTF-8">
+<title>Insert title here</title>
 </head>
 <body>
+<!-- 제이쿼리 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-  <head>
-    <title>네이버로그인</title>
-  </head>
-  <body>
-  <%
-    String clientId = "6mYcCoqVLMhsqTgC69DA";//애플리케이션 클라이언트 아이디값";
-    String redirectURI = URLEncoder.encode("http://localhost:8080/login/oauth2/code/naver", "UTF-8");
-    SecureRandom random = new SecureRandom();
-    String state = new BigInteger(130, random).toString();
-    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code"
-         + "&client_id=" + clientId
-         + "&redirect_uri=" + redirectURI
-         + "&state=" + state;
-    session.setAttribute("state", state);
- %>
-  <a href="<%=apiURL%>"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
-  </body>
-</html>
+<!-- 테일윈드 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.7/tailwind.min.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.0/purify.min.js"></script>
+
+<!-- 토스트 UI 에디터 코어 -->
+<script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+<link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
+
+<!-- 토스트 UI 에디터 플러그인, 컬러피커 -->
+<link rel="stylesheet" href="https://uicdn.toast.com/tui-color-picker/latest/tui-color-picker.css" />
+<script src="https://uicdn.toast.com/tui-color-picker/latest/tui-color-picker.min.js"></script>
+
+<link rel="stylesheet"
+	href="https://uicdn.toast.com/editor-plugin-color-syntax/latest/toastui-editor-plugin-color-syntax.min.css" />
+<script src="https://uicdn.toast.com/editor-plugin-color-syntax/latest/toastui-editor-plugin-color-syntax.min.js"></script>
+
+<!-- 토스트 UI 차트 -->
+<link rel="stylesheet" href="https://uicdn.toast.com/chart/latest/toastui-chart.css">
+<script src="https://uicdn.toast.com/chart/latest/toastui-chart.js"></script>
+<!-- 토스트 UI 차트와 토스트 UI 에디터를 연결  -->
+<script src="https://uicdn.toast.com/editor-plugin-chart/latest/toastui-editor-plugin-chart.min.js"></script>
+
+<!-- 토스트 UI 에디터 플러그인, 코드 신텍스 하이라이터 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
+<link rel="stylesheet"
+	href="https://uicdn.toast.com/editor-plugin-code-syntax-highlight/latest/toastui-editor-plugin-code-syntax-highlight.min.css">
+<script
+	src="https://uicdn.toast.com/editor-plugin-code-syntax-highlight/latest/toastui-editor-plugin-code-syntax-highlight-all.min.js"></script>
+
+<!-- 토스트 UI 에디터 플러그인, 테이블 셀 병합 -->
+<script
+	src="https://uicdn.toast.com/editor-plugin-table-merged-cell/latest/toastui-editor-plugin-table-merged-cell.min.js"></script>
+
+<!-- 토스트 UI 에디터 플러그인, katex -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.13/katex.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.13/katex.min.css">
+
+<!-- 토스트 UI 에디터 플러그인, UML -->
+<script src="https://uicdn.toast.com/editor-plugin-uml/latest/toastui-editor-plugin-uml.min.js"></script>
 
 
+
+<style>
+/* 토스트 UI */
+.absolute {
+	position: absolute;
+}
+
+.relative {
+	position: relative;
+}
+
+.top-0 {
+	top: 0;
+}
+
+.left-0 {
+	left: 0;
+}
+
+.w-full {
+	width: 100%;
+}
+
+.ratio-16\/9::after {
+	content: "";
+	display: block;
+	padding-top: calc(100%/ 16 * 9);
+}
+
+.ratio-16\/9::after {
+	content: "";
+	display: block;
+	padding-top: calc(100%/ 16 * 9);
+}
+
+.ratio-9\/16::after {
+	content: "";
+	display: block;
+	padding-top: calc(100%/ 9 * 16);
+}
+
+.ratio-1\/1::after {
+	content: "";
+	display: block;
+	padding-top: calc(100%/ 1 * 1);
+}
+
+.ratio-1\/2::after {
+	content: "";
+	display: block;
+	padding-top: calc(100%/ 1 * 2);
+}
+/* 토스트 UI */
+</style>
+
+<script>
+
+// const options = {
+// 		  // ...
+// 		  // 직접 입력하면서 커스터마이징 가능
+// 		  // toolbarItems 뻬면 기본적인 툴바 다 사용하는 것
+// 		  toolbarItems: [
+// 		    ['heading', 'bold', 'italic', 'strike'],
+// 		    ['hr', 'quote'],
+// 		    ['ul', 'ol', 'task', 'indent', 'outdent'],
+// 		    ['table', 'image', 'link'],
+// 		    ['code', 'codeblock'],
+// 		    ['scrollSync'],
+// 		  ],
+// 		};
+
+function getUriParams(uri) {
+	  uri = uri.trim();
+	  uri = uri.replaceAll("&amp;", "&");
+	  if (uri.indexOf("#") !== -1) {
+	    let pos = uri.indexOf("#");
+	    uri = uri.substr(0, pos);
+	  }
+
+	  let params = {};
+
+	  uri.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (str, key, value) {
+	    params[key] = value;
+	  });
+	  return params;
+	}
+
+	function codepenPlugin() {
+	  const toHTMLRenderers = {
+	    codepen(node) {
+	      const html = renderCodepen(node.literal);
+
+	      return [
+	        { type: "openTag", tagName: "div", outerNewLine: true },
+	        { type: "html", content: html },
+	        { type: "closeTag", tagName: "div", outerNewLine: true }
+	      ];
+	    }
+	  };
+
+	  function renderCodepen(uri) {
+	    let uriParams = getUriParams(uri);
+
+	    let height = 400;
+
+	    let preview = "";
+
+	    if (uriParams.height) {
+	      height = uriParams.height;
+	    }
+
+	    let width = "100%";
+
+	    if (uriParams.width) {
+	      width = uriParams.width;
+	    }
+
+	    if (!isNaN(width)) {
+	      width += "px";
+	    }
+
+	    let iframeUri = uri;
+
+	    if (iframeUri.indexOf("#") !== -1) {
+	      let pos = iframeUri.indexOf("#");
+	      iframeUri = iframeUri.substr(0, pos);
+	    }
+
+	    return (
+	      '<iframe height="' +
+	      height +
+	      '" style="width: ' +
+	      width +
+	      ';" scrolling="no" title="" src="' +
+	      iframeUri +
+	      '" frameborder="no" allowtransparency="true" allowfullscreen="true"></iframe>'
+	    );
+	  }
+
+	  return { toHTMLRenderers };
+	}
+	// 유튜브 플러그인 끝
+
+	// repl 플러그인 시작
+	function replPlugin() {
+	  const toHTMLRenderers = {
+	    repl(node) {
+	      const html = renderRepl(node.literal);
+
+	      return [
+	        { type: "openTag", tagName: "div", outerNewLine: true },
+	        { type: "html", content: html },
+	        { type: "closeTag", tagName: "div", outerNewLine: true }
+	      ];
+	    }
+	  };
+
+	  function renderRepl(uri) {
+	    var uriParams = getUriParams(uri);
+
+	    var height = 400;
+
+	    if (uriParams.height) {
+	      height = uriParams.height;
+	    }
+
+	    return (
+	      '<iframe frameborder="0" width="100%" height="' +
+	      height +
+	      'px" src="' +
+	      uri +
+	      '"></iframe>'
+	    );
+	  }
+
+	  return { toHTMLRenderers };
+	}
+
+	function youtubePlugin() {
+	  const toHTMLRenderers = {
+	    youtube(node) {
+	      const html = renderYoutube(node.literal);
+
+	      return [
+	        { type: "openTag", tagName: "div", outerNewLine: true },
+	        { type: "html", content: html },
+	        { type: "closeTag", tagName: "div", outerNewLine: true }
+	      ];
+	    }
+	  };
+
+	  function renderYoutube(uri) {
+	    uri = uri.replace("https://www.youtube.com/watch?v=", "");
+	    uri = uri.replace("http://www.youtube.com/watch?v=", "");
+	    uri = uri.replace("www.youtube.com/watch?v=", "");
+	    uri = uri.replace("youtube.com/watch?v=", "");
+	    uri = uri.replace("https://youtu.be/", "");
+	    uri = uri.replace("http://youtu.be/", "");
+	    uri = uri.replace("youtu.be/", "");
+
+	    let uriParams = getUriParams(uri);
+
+	    let width = "100%";
+	    let height = "100%";
+
+	    let maxWidth = 500;
+
+	    if (!uriParams["max-width"] && uriParams["ratio"] == "9/16") {
+	      uriParams["max-width"] = 300;
+	    }
+
+	    if (uriParams["max-width"]) {
+	      maxWidth = uriParams["max-width"];
+	    }
+
+	    let ratio = "16/9";
+
+	    if (uriParams["ratio"]) {
+	      ratio = uriParams["ratio"];
+	    }
+
+	    let marginLeft = "auto";
+
+	    if (uriParams["margin-left"]) {
+	      marginLeft = uriParams["margin-left"];
+	    }
+
+	    let marginRight = "auto";
+
+	    if (uriParams["margin-right"]) {
+	      marginRight = uriParams["margin-right"];
+	    }
+
+	    let youtubeId = uri;
+
+	    if (youtubeId.indexOf("?") !== -1) {
+	      let pos = uri.indexOf("?");
+	      youtubeId = youtubeId.substr(0, pos);
+	    }
+
+	    return (
+	      '<div style="max-width:' +
+	      maxWidth +
+	      "px; margin-left:" +
+	      marginLeft +
+	      "; margin-right:" +
+	      marginRight +
+	      ';" class="ratio-' +
+	      ratio +
+	      ' relative"><iframe class="absolute top-0 left-0 w-full" width="' +
+	      width +
+	      '" height="' +
+	      height +
+	      '" src="https://www.youtube.com/embed/' +
+	      youtubeId +
+	      '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>'
+	    );
+	  }
+	  // 유튜브 플러그인 끝
+
+	  return { toHTMLRenderers };
+	}
+
+	// katex 플러그인
+	function katexPlugin() {
+	  const toHTMLRenderers = {
+	    katex(node) {
+	      let html = katex.renderToString(node.literal, {
+	        throwOnError: false
+	      });
+
+	      return [
+	        { type: "openTag", tagName: "div", outerNewLine: true },
+	        { type: "html", content: html },
+	        { type: "closeTag", tagName: "div", outerNewLine: true }
+	      ];
+	    }
+	  };
+
+	  return { toHTMLRenderers };
+	}
+
+	const ToastEditor__chartOptions = {
+	  minWidth: 100,
+	  maxWidth: 600,
+	  minHeight: 100,
+	  maxHeight: 300
+	};
+
+	function ToastEditor__init() {
+	  $(".toast-ui-editor").each(function (index, node) {
+	    const $node = $(node);
+	    const $initialValueEl = $node.find(" > script");
+	    const initialValue =
+	      $initialValueEl.length == 0 ? "" : $initialValueEl.html().trim();
+
+	    const editor = new toastui.Editor({
+	      el: node,
+	      previewStyle: "vertical",
+	      initialValue: initialValue,
+	      height: "600px",
+	      plugins: [
+	        [toastui.Editor.plugin.chart, ToastEditor__chartOptions],
+	        [toastui.Editor.plugin.codeSyntaxHighlight, { highlighter: Prism }],
+	        toastui.Editor.plugin.colorSyntax,
+	        toastui.Editor.plugin.tableMergedCell,
+	        toastui.Editor.plugin.uml,
+	        katexPlugin,
+	        youtubePlugin,
+	        codepenPlugin,
+	        replPlugin
+	      ],
+	      customHTMLSanitizer: (html) => {
+	        return (
+	          DOMPurify.sanitize(html, {
+	            ADD_TAGS: ["iframe"],
+	            ADD_ATTR: [
+	              "width",
+	              "height",
+	              "allow",
+	              "allowfullscreen",
+	              "frameborder",
+	              "scrolling",
+	              "style",
+	              "title",
+	              "loading",
+	              "allowtransparency"
+	            ]
+	          }) || ""
+	        );
+	      }
+	    });
+
+	    $node.data("data-toast-editor", editor);
+	  });
+	}
+
+	function ToastEditorView__init() {
+	  $(".toast-ui-viewer").each(function (index, node) {
+	    const $node = $(node);
+	    const $initialValueEl = $node.find(" > script");
+	    const initialValue =
+	      $initialValueEl.length == 0 ? "" : $initialValueEl.html().trim();
+	    $node.empty();
+
+	    let viewer = new toastui.Editor.factory({
+	      el: node,
+	      initialValue: initialValue,
+	      viewer: true,
+	      plugins: [
+	        [toastui.Editor.plugin.codeSyntaxHighlight, { highlighter: Prism }],
+	        toastui.Editor.plugin.colorSyntax,
+	        toastui.Editor.plugin.tableMergedCell,
+	        toastui.Editor.plugin.uml,
+	        katexPlugin,
+	        youtubePlugin,
+	        codepenPlugin,
+	        replPlugin
+	      ],
+	      customHTMLSanitizer: (html) => {
+	        return (
+	          DOMPurify.sanitize(html, {
+	            ADD_TAGS: ["iframe"],
+	            ADD_ATTR: [
+	              "width",
+	              "height",
+	              "allow",
+	              "allowfullscreen",
+	              "frameborder",
+	              "scrolling",
+	              "style",
+	              "title",
+	              "loading",
+	              "allowtransparency"
+	            ]
+	          }) || ""
+	        );
+	      }
+	    });
+
+	    $node.data("data-toast-editor", viewer);
+	  });
+	}
+
+	$(function () {
+	  ToastEditor__init();
+	  ToastEditorView__init();
+	});
+
+</script>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<form action="/member/uploadProfile" method="post" enctype="multipart/form-data">
+		<input type="file" name="profileImage" accept="image/*" />
+		<button type="submit">사진 업로드</button>
+	</form>
+	<div>
+		<div class="bg-white p-6 rounded-xl shadow-md border border-gray-200">
+			<form id="articleForm" action="../article/doWrite" method="POST">
+				<input type="hidden" name="boardId" value="2" />
+				<input type="hidden" name="body" id="bodyInput" />
+
+				<div>
+					<label for="partId" class="block mb-1 text-sm font-semibold text-gray-700">분류</label>
+					<select name="partId"
+						class="partId border border-[#3C3C29] bg-white text-[#3C3C29] px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-[#E1D8CD]">
+						<option value="" selected disabled>분류를 선택하세요</option>
+						<option value="1">머리</option>
+						<option value="2">목/어깨뒤쪽</option>
+						<option value="3">쇄골/어깨앞쪽</option>
+						<option value="4">팔</option>
+						<option value="5">등/허리</option>
+						<option value="6">가슴/배</option>
+						<option value="7">골반</option>
+						<option value="8">다리 앞쪽</option>
+						<option value="9">다리 뒤쪽</option>
+						<option value="10">종아리/발목</option>
+					</select>
+				</div>
+				<div>
+					<label for="titleInput" class="block text-sm font-semibold text-gray-700">제목</label>
+					<input id="titleInput" required name="title" type="text"
+						class="border border-[#3C3C29] bg-white text-[#3C3C29] px-3 py-2 rounded w-full mt-2" autocomplete="off"
+						placeholder="제목" />
+				</div>
+				<div>
+					<label class="block mb-1 text-sm font-semibold text-gray-700"></label>
+					<div id="editor" class="border border-white rounded-md"></div>
+				</div>
+
+				<!-- 버튼 -->
+				<div class="flex justify-between pt-4">
+					<button type="button" onclick="history.back();" class="px-4 py-2 bg-gray-200 text-gray-800 rounde">뒤로가기</button>
+					<button class="btn btn-primary" type="submit">작성</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="img_upload"></div>
+<style>
+.img_upload {
+	width: 100px;
+	height: 100px;
+}
+</style>
+
+	<script>
+const editor = new toastui.Editor({
+	  el: document.querySelector('#editor'),
+	  height: '700px',
+	  initialEditType: 'markdown',
+	  previewStyle: 'vertical',
+	  placeholder: '내용을 입력해 주세요.',
+	  hooks: {
+	    addImageBlobHook: async (blob, callback) => {
+	      const formData = new FormData();
+	      formData.append('image', blob);
+
+	      try {
+	        const response = await fetch('/upload-image', {
+	          method: 'POST',
+	          body: formData
+	        });
+
+	        const result = await response.json();
+	        const imageUrl = result.data.imageUrl;
+
+	        callback(imageUrl, 'image');
+
+	        // 이미지 업로드 성공 후 .img_upload에 배경 이미지 적용 (jQuery)
+	        $('.img_upload').css({
+	          'background-image': `url('${imageUrl}')`,
+	          'background-size': 'cover',
+	          'background-position': 'center'
+	        });
+
+	      } catch (error) {
+	        alert('이미지 업로드 실패');
+	        console.error('Upload error:', error);
+	      }
+	    }
+	  }
+	});
+</script>
 
 </body>
 </html>

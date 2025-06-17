@@ -54,8 +54,4 @@ public class usrBookmarkController {
 	
 		return "/usr/bookmark/like";
 	}
-	
-	
-
-
 }

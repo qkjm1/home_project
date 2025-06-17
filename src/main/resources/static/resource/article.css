@@ -38,16 +38,15 @@ ul, li, a {
 	padding: 1rem;
 
 }
-
+.toastui-editor-popup-body{
+	
+	background-color: #fff;
+}
 /* input, select 공통 커스터마이징 */
 input[type="text"], select {
 	transition: box-shadow 0.2s ease;
 }
 
-input[type="text"]:focus, select:focus {
-	box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.4);
-	/* Tailwind의 ring-blue-500 */
-}
 
 /* 버튼 hover 효과 강조 */
 button:hover {
@@ -128,3 +127,5 @@ button:hover {
 .partId option[disabled] {
 	color: #888888;
 }
+
+

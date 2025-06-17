@@ -1,8 +1,9 @@
 /* 전체 컨테이너 */
 .article-detail {
 	position: relative;
-	max-width: 90%;
+	width: 1000px;
 	margin: 0 auto;
+	height: 1200px;
 	padding: 3rem 1rem;
 	font-family: 'Noto Sans KR', sans-serif;
 	color: #212529;

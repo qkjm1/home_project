@@ -19,5 +19,9 @@ public interface MemberRepository {
 
 	// id로 전체 셀렉
 	public Member memberByIntId(int loginId);
+
+	
+	// 멤버프로필 사진
+	public void updateProfileImage(String string);
 		
 }

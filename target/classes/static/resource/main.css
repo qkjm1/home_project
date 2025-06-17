@@ -27,17 +27,17 @@ html, body {
 	position: relative;
 	display: flex;
 	justify-content: center; /* 수평 정렬 */
-	align-items:flex-start;;
+	align-items: flex-start;;
 }
 
 .main_line_1-2 {
-	top: 950px;
+	top: 1050px;
 	width: 100%;
 	height: 100px;
-	background-color: #E1D8CD;
+	background-color: #3C3C29;
 	border-radius: 9999px; /* 둥글게 */
 	position: absolute;
-	z-index: 10;
+	z-index: 1;
 }
 
 .main_line_2-3 {
@@ -63,36 +63,53 @@ html, body {
 
 /*  검색박스 */
 .search-box {
+	margin: auto;
 	position: relative;
 	display: flex;
 	align-items: center;
-	width: 500px;
-	margin-top: 100px;
-	margin-bottom: 30px;
+	min-width: 500px;
+	margin-top: 450px;
 	display: flex;
+	z-index: 10;
 }
 
 .search-box input {
-	background-color: #F5F5F5;
 	width: 100%;
 	padding: 10px 16px;
 	border: 1px solid #ccc;
 	border-radius: 9999px; /* 둥글게 */
 	font-size: 16px;
 	transition: 0.3s;
+	background-color: #F5F5F5;
 }
 
 .search-box button {
 	position: absolute;
-	margin-left: 460px;
+	right: 10px;
 	color: black;
 }
 
 .search-box input:focus {
-	background-color: #F5F5F5;
 	outline: none;
-	border-color: #007BFF; /* 포커스 시 파란색 */
-	box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+	border-color: #3C3C29; /* 포커스 시 파란색 */
+	box-shadow: 0 0 0 3px rgba(60, 60, 41, 0.2);
+}
+
+.search-box button:hover {
+	color: #EAD292;
+}
+
+.search-box button {
+	position: absolute;
+	right: 8px;
+	top: 50%;
+	transform: translateY(-50%);
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 0;
+	color: #3C3C29;
+	transition: color 0.3s;
 }
 
 /*메인 인포*/
@@ -121,15 +138,14 @@ html, body {
 
 /* hover 시 오버레이 사라짐 */
 .sprite:hover::after {
-  opacity: 0;
+	opacity: 0;
 }
 
 /* 해당 요소만 선명하게 */
 .sprite:hover {
-  filter: none;
-  z-index: 1;
+	filter: none;
+	z-index: 1;
 }
-
 
 .info-box-items>div:nth-child(1):hover {
 	content: '머리';
@@ -175,10 +191,16 @@ html, body {
 }
 
 .info-box-items>div:nth-child(10):hover {
-	
 	content: '종아리/발목';
 }
 
+/*2박스*/
+#map {
+	position: absolute;
+	margin: auto;
+	top: 80px;
+	border-radius: 8px; /* 둥글게 */
+}
 
 /*3박스*/
 .main_3-box {

@@ -5,9 +5,25 @@
 <%@ include file="../common/head.jspf"%>
 <title>MAIN</title>
 
+
+<script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.141.0/build/three.module.js",
+        "GLTFLoader": "https://unpkg.com/three@0.141.0/examples/jsm/loaders/GLTFLoader.js",
+        "OrbitControls": "https://unpkg.com/three@0.141.0/examples/jsm/controls/OrbitControls.js"
+      }
+    }
+  </script>
+
+
+<script type="module" src="/resource/00_TEST.js"></script>
 <link rel="stylesheet" href="/resource/main.css" />
 <link rel="stylesheet" href="/resource/main2.css" />
 <link rel="stylesheet" href="/resource/main3.css" />
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dfd275f49b78960a0458d6f6294cbde2&libraries=services"></script>
+<script type="module" src="/resource/kakao.js"></script>
 <div class="contain mx-auto flex flex-col">
 	<div class="main_1-box flex">
 
@@ -25,16 +41,9 @@
 				<div class="sprite sprite-10" onclick="location.href='/usr/article/infolist?boardId=2&partId=10'"></div>
 			</div>
 		</div>
-	</div>
-	<div class="container">
-		<div class="image-wrapper">
-			<img src="/imgs/123.png" alt="Sample Image" />
-		</div>
-	</div>
-	<div class="main_line_1-2"></div>
-	<div class="main_2-box">
-		<form action="/usr/article/infolist" method="post" class="mx-auto">
-			<input type="hidden" name="searchKeywordTypeCode" value="QnA" />
+
+		<form class="w-full flex">
+			<input type="hidden" name="searchKeywordTypeCode" value="info" />
 			<input type="hidden" name="boardId" value="2" />
 			<div class="search-box">
 				<input type="text" placeholder="검색어를 입력하세요" name="searchKeyword" value="${param.searchKeyword}" />
@@ -47,8 +56,34 @@
 				</button>
 			</div>
 		</form>
+
 	</div>
+	
+
+	<div class="container">
+		<div class="image-wrapper">
+			<img src="/imgs/123.png" alt="Sample Image" />
+		</div>
+	</div>
+	
+	
+
+	<div class="main_line_1-2"></div>
+
+	
+	
+	<div class="main_2-box">
+	
+		<div id="map" style="width: 800px; height: 800px;">map</div>
+		
+	</div>
+	
+	
+	
 	<div class="main_line_2-3"></div>
+	
+	
+	
 	<div class="flex-grow main_3-box">
 		<div class="main_1-box1 flex">
 			<c:forEach var="i" begin="1" end="10">
@@ -76,17 +111,3 @@
 </div>
 
 <%@ include file="../common/poot.jspf"%>
-
-
-<script type="importmap">
-    {
-      "imports": {
-        "three": "https://unpkg.com/three@0.141.0/build/three.module.js",
-        "GLTFLoader": "https://unpkg.com/three@0.141.0/examples/jsm/loaders/GLTFLoader.js",
-        "OrbitControls": "https://unpkg.com/three@0.141.0/examples/jsm/controls/OrbitControls.js"
-      }
-    }
-  </script>
-
-
-<script type="module" src="/resource/00_TEST.js"></script>

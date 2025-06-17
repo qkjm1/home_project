@@ -280,9 +280,9 @@ function InfoArticle__get(partId) {
 	}, 'json');
 }
 
-
+/*
 youtubeList__getMultiple(queryMap);
-
+*/
 
 let nextPageToken = null;
 let isLoading = false;
