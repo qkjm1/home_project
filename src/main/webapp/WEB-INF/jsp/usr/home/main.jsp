@@ -16,7 +16,7 @@
     }
   </script>
 
-
+<script type="module" src="/resource/ajax.js"></script>
 <script type="module" src="/resource/00_TEST.js"></script>
 <link rel="stylesheet" href="/resource/main.css" />
 <link rel="stylesheet" href="/resource/main2.css" />
@@ -58,17 +58,6 @@
 		</form>
 
 	</div>
-	
-
-	<div class="container">
-		<div class="image-wrapper">
-			<img src="/imgs/123.png" alt="Sample Image" />
-		</div>
-	</div>
-	
-	
-
-	<div class="main_line_1-2"></div>
 
 	
 	

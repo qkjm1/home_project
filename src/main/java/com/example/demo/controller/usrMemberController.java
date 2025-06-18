@@ -183,6 +183,18 @@ public class usrMemberController {
 	public String showusrmodify(HttpServletRequest req, Model model) {		
 		Member member = memberService.memberByIntId(rq.getIsLoginMemberId());
 		
+		System.err.println(member.getId());
+		String profileImage = null;
+		ResultData<String> usrProfileImage = memberService.findById(rq.getIsLoginMemberId());
+		
+		
+		if (usrProfileImage == null || usrProfileImage.isFail() || usrProfileImage.getResultCode().startsWith("F-")) {
+			profileImage = "/profile/default.png";
+		}else {
+			profileImage = usrProfileImage.getData1();
+		}
+		
+		model.addAttribute("profileImage", profileImage);
 		model.addAttribute("member", member);
 		return "/usr/member/mypage/usrmodify";
 	}

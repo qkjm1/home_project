@@ -20,7 +20,19 @@
   <img src="${empty profileImage ? '/profile/default.png' : profileImage}" alt="프로필 이미지" style="width:150px; height:150px; border-radius:50%;">
   
 </div>
+<script>
 
+const evtSource = new EventSource(`/sse/subscribe?memberId=123`); // 로그인된 유저 ID로 대체
+
+evtSource.addEventListener("connect", function(e) {
+    console.log("SSE 연결됨: " + e.data);
+});
+
+evtSource.addEventListener("alarm", function(e) {
+    console.log("알림 수신: " + e.data);
+    // 예: 알림 표시 UI 업데이트
+});
+</script>
 
 
 

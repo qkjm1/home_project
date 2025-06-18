@@ -22,7 +22,7 @@ public interface MemberRepository {
 
 	
 	// 멤버프로필 사진
-	public void updateProfileImage(int usrId, String string);
+	public void updateProfileImage(int usrId, String url);
 
 	public Member findById(int usrId);
 		

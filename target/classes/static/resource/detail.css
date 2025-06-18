@@ -132,5 +132,21 @@
 }
 
 .info-body {
-	border-top: 1px solid #012C4E;
+	border-top: 1px solid #3C3C29;
+}
+
+.profile_img {
+	display: flex;
+	justify-content:center;
+	align-items: center;
+	padding-bottom:20px; 
+}
+
+
+.profile_img > form > button {
+	border: 1px solid #3C3C29;
+	margin-top: 10px;
+	width: 100px;
+	height:20px;
+	justify-content: center;
 }

@@ -3,6 +3,7 @@
 
 <c:set var="pageTitle" value="MODIFY"></c:set>
 <%@ include file="../common/head.jspf"%>
+<%@ include file="../common/toastUiEditorLib.jspf"%>
 
 <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 <link rel="stylesheet" href="/resource/common.css" />
@@ -12,6 +13,7 @@
 	<div>
 		<div class="mx-auto">
 			<form id="articleForm" action="../article/doModify" method="POST">
+				<input type="hidden" name="articleId" value="${article.id}" />
 				<input type="hidden" name="boardId" value="2" />
 				<input type="hidden" name="body" id="bodyInput" />
 
@@ -25,11 +27,12 @@
 					<option value="6">종아리/발목</option>
 				</select>
 
-				<input id="titleInput" required="required" name="title" type="text" autocomplete="off" placeholder="제목" value="${article.title }"/>
+				<input id="titleInput" required="required" name="title" type="text" autocomplete="off" placeholder="제목"
+					value="${article.title }" />
 				<div class="h-2"></div>
 
-				<div id="editor" value="${article.body}"></div>
-
+				<div id="editor"></div>
+				<input type="hidden" id="articleBody" value="${article.body}" />
 
 				<div class="btns flex justify-between">
 					<button class="btn btn-ghost" type="button" onclick="history.back();">뒤로가기</button>
@@ -38,50 +41,26 @@
 			</form>
 		</div>
 	</div>
-
-	<script>
-	  $(document).ready(function () {
-		    // TOAST UI Editor 생성
-		    const editor = new toastui.Editor({
-		      el: document.querySelector('#editor'),
-		      height: '400px',
-		      initialEditType: 'markdown',
-		      previewStyle: 'vertical'
-		    });
-
-		    $('#articleForm').on('submit', function (e) {
-		      const title = $('#titleInput').val().trim();
-		      const content = editor.getMarkdown().trim();
-		      const partId = $('.partId').val();
-
-		      // 분류 검사
-		      if (!partId) {
-		        alert('분류를 선택해주세요.');
-		        e.preventDefault();
-		        return;
-		      }
-
-		      // 제목 검사
-		      if (!title) {
-		        alert('제목을 입력해주세요.');
-		        $('#titleInput').focus();
-		        e.preventDefault();
-		        return;
-		      }
-
-		      // 내용 검사
-		      if (!content) {
-		        alert('내용을 입력해주세요.');
-		        e.preventDefault();
-		        return;
-		      }
-
-		      // 본문 내용을 hidden input에 넣기
-		      $('#bodyInput').val(content);
-		    });
-		  });
-	</script>
 </div>
+
+<script>
+	const editor = new toastui.Editor({
+		el : document.querySelector('#editor'),
+		height : '800px',
+		initialEditType : 'markdown',
+		previewStyle : 'vertical',
+		initialValue : document.querySelector('#articleBody').value
+	});
+
+	document.querySelector('#articleForm').addEventListener(
+			'submit',
+			function(e) {
+				e.preventDefault();
+				document.querySelector('#bodyInput').value = editor
+						.getMarkdown();
+				this.submit();
+			});
+</script>
 
 
 <%@ include file="../common/poot.jspf"%>

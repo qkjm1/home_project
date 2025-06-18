@@ -112,7 +112,7 @@ public class usrArticleController {
 	
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
-	public String doModify(HttpServletRequest req, int usrId, String title, String body, int articleId) {
+	public String doModify(HttpServletRequest req,String title, String body, int articleId) {
 
 		Article article = articleService.articleRowById(articleId);
 
@@ -120,7 +120,7 @@ public class usrArticleController {
 			return Ut.f("F-1", "없는 게시글");
 		}
 
-		ResultData usrAuthor = articleService.usrAuthor(usrId, article);
+		ResultData usrAuthor = articleService.usrAuthor(rq.getIsLoginMemberId(), article);
 
 		if (usrAuthor.isFail()) {
 			return Ut.f(usrAuthor.getResultCode(), usrAuthor.getMsg());

@@ -1,4 +1,4 @@
-html, body {
+html {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -20,19 +20,53 @@ html, body {
 	width: 75%;
 }
 
-ul li {
-	margin: 10px;
+a {
+	padding: 10px;
 }
 
 .top-box {
 	width: 100%;
 }
 
-.top-box>div {
+.top-box div {
 	padding: 0px 20px 0px 20px;
 }
 
-.top-box>div li {
-	padding: 8px;
+.top-box div ul li {
+	position: relative;
 }
 
+.myP {
+	justify-content: flex-end;
+	align-items: flex-end;
+	top: 60px;
+	background-color: #E1D8CD;;
+	right: 0px;
+	border-radius: 20px; /* 둥글게 */
+	font-size: 20px;
+	width: 140px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+	color: #3C3C29;
+	transition: opacity 0.3s ease;
+	opacity: 0;
+	visibility: hidden;
+}
+
+
+.myimgshow {
+	opacity: 1;
+	visibility: visible;
+}
+
+.myP  {
+	display: block;
+}
+
+.myP > li  {
+	display: block;
+}
+
+.myP > li > a  {
+	display: block;
+	padding: 10px;
+}

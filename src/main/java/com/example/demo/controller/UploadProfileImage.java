@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.demo.repository.MemberRepository;
 import com.example.demo.service.MemberService;
 import com.example.demo.vo.Member;
+import com.example.demo.vo.ResultData;
 import com.example.demo.vo.Rq;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -33,15 +34,16 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.ui.Model;
 
 @Controller
-public class ImgProfileController {
+public class UploadProfileImage {
 	@Autowired
 	private Rq rq;
-
+	
 	@Autowired
 	private MemberRepository memberRepository;
-
+	
 	@PostMapping("/member/uploadProfile")
-	public String uploadProfileImage(@RequestParam("profileImage") MultipartFile image, HttpServletRequest req,
+	@ResponseBody
+	public ResultData uploadProfileImage(@RequestParam("profileImage") MultipartFile image, HttpServletRequest req,
 			Model model) throws IOException {
 		if (!image.isEmpty()) {
 			String uploadDir = "C:/upload/profile/";
@@ -58,16 +60,17 @@ public class ImgProfileController {
 			// DB에 프로필 이미지 경로 저장 (예: /profile/uuid_img.jpg)
 			memberRepository.updateProfileImage(rq.getIsLoginMemberId(),"/profile/" + filename);
 
-			model.addAttribute("msg", "업로드 성공!");
+			return ResultData.from("S-1", "사진저장성공", "사진경로", filename);
 		}
 
-		return "/usr/demo";
+		return ResultData.from("F-1", "저장실패");
 	}
-
-	@GetMapping("/member/showMyPage")
-	public String showMyPage(HttpServletRequest req, Model model) {
+	
+	
+	@GetMapping("/member/showImg")
+	@ResponseBody
+	public ResultData showImg(HttpServletRequest req, Model model) {
 		
-
 		Member member = memberRepository.findById(rq.getIsLoginMemberId());
 		String profileImage = member.getProfileImage();
 		System.err.println(profileImage);
@@ -75,10 +78,9 @@ public class ImgProfileController {
 		if (profileImage == null || profileImage.isEmpty()) {
 			profileImage = "/profile/default.png";
 		}
-
-		model.addAttribute("profileImage", profileImage);
-
-		return "/usr/demo3"; // JSP 경로
+		
+		return ResultData.from("S-1","사진 가져오기 성공", "profileImage" ,profileImage); // JSP 경로Add commentMore actions
 	}
+	
 
 }

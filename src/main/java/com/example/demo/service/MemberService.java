@@ -59,5 +59,21 @@ public class MemberService {
 	}
 
 
+	public ResultData<String> findById(int loginId) {
+		 Member memberImg = memberRepository.findById(loginId);
+		
+		 if (memberImg == null) {
+		        return ResultData.from("F-2", "회원 정보 없음");
+		    }
+
+		    String imagePath = memberImg.getProfileImage();
+		    if (imagePath == null || imagePath.isEmpty()) {
+		        return ResultData.from("F-1", "저장된 이미지 없음");
+		    }
+		 
+		return ResultData.from("S-1", "저장된 이미지 있음","usrProfileImage",imagePath);
+	}
+
+
 
 }
