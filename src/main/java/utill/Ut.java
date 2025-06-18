@@ -43,7 +43,7 @@ public class Ut {
 			msg = "";
 		}
 
-		String resultMsg = resultCode  + msg;
+		String resultMsg = msg;
 
 		return Ut.f("""
 				<script>

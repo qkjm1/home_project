@@ -51,8 +51,8 @@
 							</li>
 						</c:if>
 						<c:if test="${rq.isLogined()}">
-							<li class="myimg relative">
-								<div class="img_reload corsur">
+							<li class="myimg">
+								<div class="img_reload">
 									<img src="${profileImage}" alt="프로필 이미지" style="width: 40px; height: 40px; border-radius: 50%;">
 								</div>
 								<ul class="absolute flex flex-col myP">

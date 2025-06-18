@@ -69,10 +69,8 @@ public class usrArticleController {
 
 		Article article = articleService.getForPrintArticle(rq.getIsLoginMemberId(), articleId);
 		
-		ResultData isBookmarkedRD = bookmarkService.isBookmarked(rq.getIsLoginMemberId(), articleId);
-		System.out.println("++++===="+isBookmarkedRD.isSuccess());
-		model.addAttribute("isBookmarked", isBookmarkedRD.isSuccess()); // 좋아요를 했는지 안했는지		
 		model.addAttribute("article", article);
+		model.addAttribute("usr", rq.getIsLoginMemberId());
 		
 		return "usr/article/detail";
 	}
@@ -112,9 +110,9 @@ public class usrArticleController {
 	
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
-	public String doModify(HttpServletRequest req,String title, String body, int articleId) {
+	public String doModify(HttpServletRequest req,String title, String body, int id ,int boardId, int partId) {
 
-		Article article = articleService.articleRowById(articleId);
+		Article article = articleService.articleRowById(id);
 
 		if (article == null) {
 			return Ut.f("F-1", "없는 게시글");
@@ -127,33 +125,33 @@ public class usrArticleController {
 		}
 
 		if (usrAuthor.isSuccess()) {
-			articleService.modifyArticle(articleId, title, body);
+			articleService.modifyArticle(id, title, body,boardId,partId);
 		}
 
-		return Ut.f(usrAuthor.getResultCode(), usrAuthor.getMsg());
+		return Ut.jsReplace(usrAuthor.getResultCode(), usrAuthor.getMsg(),"/usr/article/detail?articleId="+id);
 	}
 
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
-	public ResultData doDelete(HttpServletRequest req, int articleId) {
+	public String doDelete(HttpServletRequest req, int articleId, int boardId) {
 
 		Article article = articleService.articleRowById(articleId);
 
 		if (article == null) {
-			return ResultData.from("F-1", "없는 게시글");
+			return Ut.f("F-1", "없는 게시글");
 		}
 
 		ResultData usrAuthor = articleService.usrAuthor(rq.getIsLoginMemberId(), article);
 
 		if (usrAuthor.isFail()) {
-			return ResultData.from(usrAuthor.getResultCode(), usrAuthor.getMsg());
+			return Ut.jsHistoryBack("",Ut.f("%d번 게시글 삭제 실패", articleId));
 		}
 
 		if (usrAuthor.isSuccess()) {
 			articleService.delArticle(articleId);
 		}
 
-		return ResultData.from(usrAuthor.getResultCode(), usrAuthor.getMsg());
+		return Ut.jsReplace("", Ut.f("%d번 게시글을 삭제했습니다", articleId),"/usr/article/infolist?boardId="+boardId);
 	}
 
 	@RequestMapping("/usr/article/qnalist")
